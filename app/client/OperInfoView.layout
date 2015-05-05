@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="668px" prefWidth="848px"/>
+  <SplitPane cursor="0" dividerLocation="450" foreground="#000000" leftComponent="pnlOperInfoData" name="splitOperInfo" parent="view" prefHeight="668px" prefWidth="845px" rightComponent="pnlOperInfoMap">
+    <font family="Monospaced" size="11" style="0"/>
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="3px" top="0px"/>
+  </SplitPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperInfoMap" parent="splitOperInfo" prefHeight="666px" prefWidth="389px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperInfoData" parent="splitOperInfo" prefHeight="666px" prefWidth="449px"/>
+  <SplitPane cursor="0" dividerLocation="300" foreground="#000000" leftComponent="splitPane1" name="splitData" orientation="0" parent="pnlOperInfoData" prefHeight="640px" prefWidth="449px" rightComponent="splitPane2">
+    <font family="Monospaced" size="11" style="0"/>
+    <AnchorsPaneConstraints bottom="-4px" left="1px" right="-1px" top="30px"/>
+  </SplitPane>
+  <SplitPane cursor="0" dividerLocation="200" foreground="#000000" leftComponent="pnTasks" name="splitPane1" orientation="0" parent="splitData" prefHeight="299px" prefWidth="447px" rightComponent="pnlManagment">
+    <font family="Monospaced" size="11" style="0"/>
+  </SplitPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnTasks" parent="splitPane1" prefHeight="199px" prefWidth="445px"/>
+  <Label cursor="0" name="lblTasks" parent="pnTasks" prefHeight="20px" prefWidth="445px" text="Происшествия">
+    <AnchorsPaneConstraints height="20px" left="0px" right="0px" top="0px"/>
+  </Label>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="grdTasks" parent="pnTasks" prefHeight="179px" prefWidth="445px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="20px"/>
+    <CheckGridColumn name="column" resizable="true"/>
+    <ModelGridColumn name="colCreateDate" title="Время создания" width="103px">
+      <ModelDate dateFormat="dd.MM.yyyy HH:mm:ss"/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTaskType" title="Тип задачи" width="103px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colIncident" title="Происшествие" width="104px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStatus" title="Статус" width="103px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagment" parent="splitPane1" prefHeight="93px" prefWidth="445px"/>
+  <Button cursor="0" name="btnSetWarrant" parent="pnlManagment" prefHeight="20px" prefWidth="130px" text="Назначить наряд" toolTipText="Назначить наряд на происшествие (двойной щелчок на карте)">
+    <AnchorsPaneConstraints height="20px" left="10px" top="10px" width="130px"/>
+  </Button>
+  <Button cursor="0" name="btnRemoveWarrant" parent="pnlManagment" prefHeight="20px" prefWidth="100px" text="Снять наряд" toolTipText="Снять наряд с происшествия">
+    <AnchorsPaneConstraints height="20px" left="180px" top="10px" width="100px"/>
+  </Button>
+  <Button cursor="0" name="btnRemoveAllWarrants" parent="pnlManagment" prefHeight="20px" prefWidth="130px" text="Снять все наряды" toolTipText="Снять все наряды с происшествия">
+    <AnchorsPaneConstraints height="20px" left="300px" top="10px" width="130px"/>
+  </Button>
+  <Label cursor="0" name="lblTaskStatus" parent="pnlManagment" prefHeight="20px" prefWidth="150px" text="Статус происшествия">
+    <AnchorsPaneConstraints height="20px" left="10px" top="40px" width="150px"/>
+  </Label>
+  <Label cursor="0" name="lblWarrantStatus" parent="pnlManagment" prefHeight="20px" prefWidth="150px" text="Статус наряда">
+    <AnchorsPaneConstraints height="20px" left="10px" top="68px" width="150px"/>
+  </Label>
+  <ModelCombo cursor="0" name="cmbTaskStatus" parent="pnlManagment" prefHeight="20px" prefWidth="190px">
+    <AnchorsPaneConstraints height="20px" left="180px" top="40px" width="190px"/>
+  </ModelCombo>
+  <ModelCombo cursor="0" name="cmbWarrantStatus" parent="pnlManagment" prefHeight="20px" prefWidth="190px">
+    <AnchorsPaneConstraints height="20px" left="180px" top="68px" width="190px"/>
+  </ModelCombo>
+  <Button cursor="0" icon="icons/arrow_right.png" name="btnChangeSelectedTasksStatus" parent="pnlManagment" prefHeight="20px" prefWidth="40px" toolTipText="Сменить статус у выбранных происшествий">
+    <AnchorsPaneConstraints height="20px" left="390px" top="40px" width="40px"/>
+  </Button>
+  <Button cursor="0" icon="icons/arrow_right.png" name="btnChangeSelectedWarrantsStatus" parent="pnlManagment" prefHeight="20px" prefWidth="40px" toolTipText="Сменить статус у выбранных нарядов">
+    <AnchorsPaneConstraints height="20px" left="390px" top="68px" width="40px"/>
+  </Button>
+  <SplitPane cursor="0" dividerLocation="200" foreground="#000000" leftComponent="pnlWarrants" name="splitPane2" orientation="0" parent="splitData" prefHeight="334px" prefWidth="447px" rightComponent="pnlSubdivisionsTree">
+    <font family="Monospaced" size="11" style="0"/>
+  </SplitPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlWarrants" parent="splitPane2" prefHeight="199px" prefWidth="445px"/>
+  <Label cursor="0" name="lblWarrants" parent="pnlWarrants" prefHeight="20px" prefWidth="450px" text="Наряды">
+    <AnchorsPaneConstraints height="20px" left="0px" right="-5px" top="0px"/>
+  </Label>
+  <ToolBar cursor="0" name="tlbWarrants" parent="pnlWarrants" prefHeight="20px" prefWidth="450px">
+    <AnchorsPaneConstraints height="20px" left="0px" right="-5px" top="20px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" icon="icons/phone_call_action.png" name="btnWarrantCall" parent="tlbWarrants" prefHeight="20px" prefWidth="20px" toolTipText="Позвонить"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="grdWarrants" parent="pnlWarrants" prefHeight="160px" prefWidth="450px">
+    <AnchorsPaneConstraints bottom="-1px" left="0px" right="-5px" top="40px"/>
+    <CheckGridColumn name="column" resizable="true"/>
+    <ModelGridColumn name="colWarrantDate" title="Дата наряда" width="75px">
+      <ModelDate dateFormat="dd.MM.yyyy"/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colСallsign" title="Позывной" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colActive" title="Выпущен на маршрут" width="75px">
+      <ModelCheckBox/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colNum" title="Номер наряда" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTransportRegnum" title="Гос. №" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colPostNum" title="Пост" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colPostWarrantKind" title="Вид наряда" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTaskTypeDescription" title="Тип задачи" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTaskIncidentDescription" title="Происшествие" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStaff1" title="Сотрудник 1" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStaff2" title="Сотрудник 2" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStaff3" title="Сотрудник 3" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStatus" title="Статус" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colDistance" title="Расстояние" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlSubdivisionsTree" parent="splitPane2" prefHeight="128px" prefWidth="445px"/>
+  <Label cursor="0" name="lblSubdivisions" parent="pnlSubdivisionsTree" prefHeight="20px" prefWidth="400px" text="Подразделения">
+    <AnchorsPaneConstraints height="20px" left="0px" top="0px" width="400px"/>
+  </Label>
+  <ToolBar cursor="0" name="tlbSubdivisions" parent="pnlSubdivisionsTree" prefHeight="20px" prefWidth="450px">
+    <AnchorsPaneConstraints height="20px" left="0px" right="-5px" top="20px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" icon="icons/phone_call_action.png" name="btnSubdivisionCall" parent="tlbSubdivisions" prefHeight="20px" prefWidth="20px" toolTipText="Позвонить"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" name="grdSubDivisions" parent="pnlSubdivisionsTree" prefHeight="88px" prefWidth="445px" showHorizontalLines="false" showOddRowsInOtherColor="false" showVerticalLines="false">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="40px"/>
+    <CheckGridColumn name="colChecks" resizable="true"/>
+    <ModelGridColumn name="colName" title="colName" width="413px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagePanelVisibility" parent="pnlOperInfoData" prefHeight="30px" prefWidth="450px">
+    <AnchorsPaneConstraints height="30px" left="0px" right="-1px" top="0px"/>
+  </AnchorsPane>
+  <CheckBox cursor="0" name="chkTasks" parent="pnlManagePanelVisibility" prefHeight="20px" prefWidth="120px" selected="true" text="Происшествия">
+    <AnchorsPaneConstraints height="20px" left="0px" top="5px" width="120px"/>
+  </CheckBox>
+  <CheckBox cursor="0" name="chkManagment" parent="pnlManagePanelVisibility" prefHeight="20px" prefWidth="100px" selected="true" text="Управление">
+    <AnchorsPaneConstraints height="20px" left="120px" top="5px" width="100px"/>
+  </CheckBox>
+  <CheckBox cursor="0" name="chkWarrants" parent="pnlManagePanelVisibility" prefHeight="20px" prefWidth="70px" selected="true" text="Наряды">
+    <AnchorsPaneConstraints height="20px" left="230px" top="5px" width="70px"/>
+  </CheckBox>
+  <CheckBox cursor="0" name="chkSubdivisions" parent="pnlManagePanelVisibility" prefHeight="20px" prefWidth="120px" selected="true" text="Подразделения">
+    <AnchorsPaneConstraints height="20px" left="310px" top="5px" width="120px"/>
+  </CheckBox>
+</layout>

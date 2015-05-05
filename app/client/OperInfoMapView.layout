@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="584px" prefWidth="605px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperInfoMap" parent="view" prefHeight="584px" prefWidth="605px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlMap" parent="pnlOperInfoMap" prefHeight="554px" prefWidth="605px">
+    <AnchorsPaneConstraints bottom="30px" left="0px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlLegend" parent="pnlOperInfoMap" prefHeight="30px" prefWidth="605px">
+    <AnchorsPaneConstraints bottom="0px" height="30px" left="0px" right="0px"/>
+  </AnchorsPane>
+  <Button cursor="0" icon="icons/legend.png" name="btnShowLegend" parent="pnlLegend" prefHeight="25px" prefWidth="25px" toolTipText="Показать легенду">
+    <AnchorsPaneConstraints bottom="3px" height="25px" left="7px" width="25px"/>
+  </Button>
+  <Button cursor="0" icon="icons/magnifier.png" name="btnSetOptimalScale" parent="pnlLegend" prefHeight="25px" prefWidth="25px" toolTipText="Оптимальный масштаб карты">
+    <AnchorsPaneConstraints bottom="3px" height="25px" left="37px" width="25px"/>
+  </Button>
+  <Button cursor="0" icon="icons/map_delete.png" name="btnRefreshMap" parent="pnlLegend" prefHeight="25px" prefWidth="25px" toolTipText="Обновить карту для текущего масштаба">
+    <AnchorsPaneConstraints bottom="3px" height="25px" left="67px" width="25px"/>
+  </Button>
+</layout>
