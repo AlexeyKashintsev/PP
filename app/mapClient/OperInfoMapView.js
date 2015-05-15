@@ -8,14 +8,22 @@ function OperInfoMapView() {
 
     var operInfoProxy = new P.ServerModule("OperInfoProxy");
     var mapOperInfo;
-
-    self.show = function () {
-        P.require('client/libs/leaflet.js', function () {
+    var mapObjects = new MapObjects();
+    self.API = mapObjects.getAPI();
+    
+    function show(panel) {
+        P.require('mapClient/libs/leaflet.js', function () {
             // geom.js depends on leaflet.js
-            P.require('client/libs/geom.js', function () {
+            P.require('mapClient/libs/geom.js', function () {
                 initMap();
+                if (panel)
+                    panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
             });
         });
+    }
+    
+    self.show = function () {
+        show();
     };
 
     // TODO : place your code here
@@ -25,15 +33,7 @@ function OperInfoMapView() {
     });
 
     this.showOnPanel = function (panel) {
-        if (panel) {
-            P.require('client/libs/leaflet.js', function () {
-                // geom.js depends on leaflet.js
-                P.require('client/libs/geom.js', function () {
-                    initMap();
-                    panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
-                });
-            });
-        }
+        show(panel);
     };
 
     function initMap() {        
@@ -72,6 +72,7 @@ function OperInfoMapView() {
             mapOperInfo.addControl(zoomControl);
             mapOperInfo.addControl(scaleControl);
             self.mapOperInfo = mapOperInfo;
+            mapObjects.setMap(mapOperInfo);
         }
 
         operInfoProxy.getDownTownCoordinates(
@@ -88,5 +89,9 @@ function OperInfoMapView() {
         if (mapOperInfo) {
             mapOperInfo.invalidateSize();
         }
+    };
+    form.button.onActionPerformed = function(event) {
+        var servReq = new ServReq();
+        servReq.show();
     };
 }

@@ -1,106 +1,4 @@
-P.require("server/libs/http.js");
-
-var DateFormatClass = Java.type("java.text.SimpleDateFormat");
-var DateClass = Java.type("java.util.Date");
-var LocaleClass = Java.type("java.util.Locale");
-var URLEncoderClass = Java.type("java.net.URLEncoder");
-
-function dateToString(aDate) {
-    if (aDate !== null) {
-        var sdf = new DateFormatClass("MMM dd, yyyy hh:mm:ss a", LocaleClass.ENGLISH);
-        var now = new DateClass(aDate.getTime());
-        return sdf.format(now);
-    } else {
-        return null;
-    }
-}
-
-function stringToDate(aValue) {
-    if (aValue !== null) {
-        var sdf = new DateFormatClass("MMM dd, yyyy hh:mm:ss a", LocaleClass.ENGLISH);
-        try {
-            return new Date(sdf.parse(aValue).getTime());
-        } catch (e) {
-            return null;
-        }
-    } else {
-        return null;
-    }
-}
-
-/** (date) -> date <br> 
- * Возвращает начало дня, соответствующего заданной дате.
- * @param aDate Параметр типа date.
- * @return Значение типа date, соответствующее дате <i>aDate</i> со значением времени, установленным в 00:00:00:000.<br>
- * Если параметр <i>aDate</i> не определен, то функция вернет <code>null</code>.
- */
-function beginOfDay(aDate) {
-    if (aDate) {
-        var dt = new Date(aDate.getTime());
-        dt.setHours(0, 0, 0, 0);
-        return dt;
-    }
-    return null;
-}
-
-/** (date) -> date <br>
- * Возвращает конец дня, соответствующего заданной дате.
- * @param aDate Параметр типа date.
- * @return Значение типа date, соответствующее дате <i>aDate</i> со значением времени, установленным в 23:59:59:999.<br>
- * Если параметр <i>aDate</i> не определен, то функция вернет <code>null</code>.
- */
-function endOfDay(aDate) {
-    if (aDate) {
-        var dt = new Date(aDate.getTime());
-        dt.setHours(23, 59, 59, 999);
-        return dt;
-    }
-    return null;
-}
-
-/** (date, number) -> date <br> 
- * Возвращает значение параметра <i>aDate</i> типа date, увеличенное на количество часов <i>hoursAmount</i>.
- * При необходимости значения месяца или года изменяются автоматически.
- * @param aDate Параметр типа date, значение которого надо увеличить.
- * @param hoursAmount Параметр типа number. Количество часов, на которое увеличивается дата <i>aDate</i>.
- * Если значение меньше 0, то значение параметра <i>aDate</i> уменьшается.
- * @return Значение параметра <i>aDate</i> типа date, увеличенное на количество часов <i>hoursAmount</i>.<br>
- * Если параметр <i>aDate</i> не определен, то функция вернет <code>null</code>.<br>
- * Если параметр <i>hoursAmount</i> не определен, то функция вернет значение параметра <i>aDate</i>.
- */
-function incHour(aDate, hoursAmount) {
-    if (aDate) {
-        if (hoursAmount) {
-            var dt = new Date(aDate.getTime());
-            dt.setHours(dt.getHours() + hoursAmount);
-            return dt;
-        } else
-            return aDate;
-    }
-    return null;
-}
-
-/** (date, number) -> date <br>
- * Возвращает значение параметра <i>aDate</i> типа date, увеличенное на количество дней <i>daysAmount</i>.
- * При необходимости значения месяца или года изменяются автоматически.
- * @param aDate Параметр типа date, значение которого надо увеличить.
- * @param daysAmount Параметр типа number. Количество дней, на которое увеличивается дата <i>aDate</i>.
- * Если значение меньше 0, то значение параметра <i>aDate</i> уменьшается.
- * @return Значение параметра <i>aDate</i> типа date, увеличенное на количество дней <i>daysAmount</i>. Время остается без изменений.<br>
- * Если параметр <i>aDate</i> не определен, то функция вернет <code>null</code>.<br>
- * Если параметр <i>daysAmount</i> не определен, то функция вернет значение параметра <i>aDate</i>. 
- */
-function incDay(aDate, daysAmount) {
-    if (aDate) {
-        if (daysAmount) {
-            var dt = new Date(aDate.getTime());
-            dt.setDate(dt.getDate() + daysAmount);
-            return dt;
-        } else
-            return aDate;
-    }
-    return null;
-}
+P.require(["server/libs/http.js", "server/libs/dateUtils.js"]);
 
 function InvocationContext() {
     this.clientIPAddress = '192.169.1.49';
@@ -202,7 +100,7 @@ function DispositionPlanWS() {
             beginIndex: 0,
             count: self.pageSize,
             loadDeletedItems: 0,
-            activeOnDate: dateToString(new Date(Date.now()))
+            activeOnDate: du.dateToString(new Date(Date.now()))
         };
         Http.post(inforUrl + 'DispositionPlanWS/getList', JSON.stringify([iContext, criteria]), function (aResponse) {
             var loaded = JSON.parse(aResponse);
@@ -258,7 +156,7 @@ function PoliceTaskWS() {
             beginIndex: 0,
             count: 2147483647,
             loadDeletedItems: 0,
-            activeOnDate: dateToString(new Date(Date.now()))
+            activeOnDate: du.dateToString(new Date(Date.now()))
         };
         Http.post(inforUrl + 'PoliceTaskWS/getList', JSON.stringify([iContext, criteria]), function (aResponse) {
             var loaded = JSON.parse(aResponse);
@@ -294,7 +192,7 @@ function PoliceWarrantUIWS() {
             beginIndex: 0,
             count: 2147483647,
             loadDeletedItems: 0,
-            activeOnDate: dateToString(new Date(Date.now()))
+            activeOnDate: du.dateToString(new Date(Date.now()))
         };
         Http.post(inforUrl + 'PoliceWarrantUIWS/getList', JSON.stringify([iContext, criteria]), function (aResponse) {
             var loaded = JSON.parse(aResponse);
@@ -313,7 +211,7 @@ function PoliceWarrantWS() {
 
     this.updateWarrantTaskById = function (warrantId, taskId, dt, onSuccess, onFailure) {
         Http.post(inforUrl + 'PoliceWarrantWS/updateWarrantTaskById',
-                JSON.stringify([iContext, warrantId, taskId, dateToString(dt)]), function (aResponse) {
+                JSON.stringify([iContext, warrantId, taskId, du.dateToString(dt)]), function (aResponse) {
             var loaded = JSON.parse(aResponse);
             onSuccess(loaded);
         }, function (e) {
@@ -371,7 +269,7 @@ function PoliceWarrant2TaskLinkWS() {
     
     this.closeWarrant2Task = function (warrantId, taskId, dt, onSuccess, onFailure) {
         Http.post(inforUrl + 'PoliceWarrant2TaskLinkWS/closeWarrant2Task',
-                JSON.stringify([iContext, warrantId, taskId, dateToString(dt)]), function (aResponse) {
+                JSON.stringify([iContext, warrantId, taskId, du.dateToString(dt)]), function (aResponse) {
             var loaded = JSON.parse(aResponse);
             onSuccess(loaded);
         }, function (e) {

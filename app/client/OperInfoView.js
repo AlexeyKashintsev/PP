@@ -77,6 +77,7 @@ function OperInfoView() {
         operInfoProxy.getFilteredPoliceTasks(
                 function (tasks) {
                     tasks.forEach(function (task) {
+                        operInfoMapView.API.newTask(task);
                         listT.push(task);
                         listenIdTask.push(task.id);
                         if (!incidents[task.incident.id])

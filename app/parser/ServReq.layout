@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="439px" prefWidth="708px"/>
+  <ModelCombo cursor="0" name="mcMethods" parent="view" prefHeight="20px" prefWidth="608px">
+    <AnchorsPaneConstraints height="20px" left="10px" right="90px" top="10px"/>
+  </ModelCombo>
+  <Button cursor="0" name="button" parent="view" prefHeight="20px" prefWidth="70px" text="button">
+    <AnchorsPaneConstraints height="20px" right="10px" top="10px" width="70px"/>
+  </Button>
+  <SplitPane cursor="0" dividerLocation="280" foreground="#000000" leftComponent="panel" name="splitPane" parent="view" prefHeight="391px" prefWidth="689px" rightComponent="res">
+    <font family="Tahoma" size="11" style="0"/>
+    <AnchorsPaneConstraints bottom="8px" left="10px" right="9px" top="40px"/>
+  </SplitPane>
+  <ModelGrid cursor="0" name="res" parent="splitPane" prefHeight="389px" prefWidth="403px">
+    <ModelGridColumn name="colKey" title="Ключ" width="201px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colValue" title="Значение" width="200px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <AnchorsPane background="#ffffff" cursor="0" name="panel" parent="splitPane" prefHeight="389px" prefWidth="279px"/>
+  <TextArea name="result" parent="panel" prefHeight="389px" prefWidth="279px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  </TextArea>
+</layout>

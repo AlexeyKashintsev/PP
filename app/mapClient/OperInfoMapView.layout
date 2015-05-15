@@ -18,4 +18,7 @@
   <Button cursor="0" icon="icons/map_delete.png" name="btnRefreshMap" parent="pnlLegend" prefHeight="25px" prefWidth="25px" toolTipText="Обновить карту для текущего масштаба">
     <AnchorsPaneConstraints bottom="3px" height="25px" left="67px" width="25px"/>
   </Button>
+  <Button cursor="0" name="button" parent="pnlLegend" prefHeight="20px" prefWidth="70px" text="button">
+    <AnchorsPaneConstraints height="20px" right="15px" top="0px" width="70px"/>
+  </Button>
 </layout>

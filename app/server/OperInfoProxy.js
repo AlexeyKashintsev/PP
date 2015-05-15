@@ -99,10 +99,10 @@ function OperInfoProxy() {
         policeTaskWS.getList(
                 function (tasks) {
                     var filtered = [];
-                    var dt = incDay(new Date(Date.now()), -1);
+                    var dt = du.incDay(new Date(Date.now()), -1);
                     tasks.forEach(function (task) {
-                        if (!(task.exec && task.exec.code === "С" && stringToDate(task.createdDateTime) < dt)){
-                            task.createdDateTime = stringToDate(task.createdDateTime);
+                        if (!(task.exec && task.exec.code === "С" && du.stringToDate(task.createdDateTime) < dt)){
+                            task.createdDateTime = du.stringToDate(task.createdDateTime);
                             filtered.push(task);
                         }                            
                     });
@@ -116,7 +116,7 @@ function OperInfoProxy() {
         policeWarrantUIWS.getList(
                 function (warrants) {
                     onSuccess(warrants.map(function(warrant){
-                        warrant.warrantDate = stringToDate(warrant.warrantDate);
+                        warrant.warrantDate = du.stringToDate(warrant.warrantDate);
                         return warrant;
                     }));
                 },
@@ -149,7 +149,7 @@ function OperInfoProxy() {
 
         var policeTaskWS = new PoliceTaskWS();
         policeTasks.forEach(function (policeTask) {
-            policeTask.createdDateTime = dateToString(policeTask.createdDateTime);
+            policeTask.createdDateTime = du.dateToString(policeTask.createdDateTime);
             policeTask.exec = status;
             policeTaskWS.save(
                     policeTask,
