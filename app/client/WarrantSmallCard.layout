@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="70px" prefWidth="400px"/>
+  <Label background="#3399ff" cursor="0" name="lbStatImg" opaque="true" parent="view" prefHeight="70px" prefWidth="70px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" top="0px" width="70px"/>
+  </Label>
+</layout>

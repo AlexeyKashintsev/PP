@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="Карточка наряда" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="561px" prefWidth="742px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlPersonal" parent="view" prefHeight="170px" prefWidth="362px">
+    <AnchorsPaneConstraints height="170px" left="380px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <ModelGrid cursor="0" name="modelGrid" parent="pnlPersonal" prefHeight="142px" prefWidth="362px">
+    <AnchorsPaneConstraints bottom="0px" height="142px" left="0px" right="0px"/>
+    <ModelGridColumn maxWidth="50px" name="colRank" preferredWidth="50px" title="Звание">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colFIO" preferredWidth="60px" title="ФИО" width="135px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colJobTitile" preferredWidth="100px" title="Должность" width="175px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <Label background="#0099ff" cursor="0" foreground="#ffffff" horizontalAlignment="0" horizontalTextPosition="0" name="lbCaption1" opaque="true" parent="pnlPersonal" prefHeight="23px" prefWidth="362px" text="Личный состав">
+    <font family="Monospaced" size="12" style="1"/>
+    <AnchorsPaneConstraints height="23px" left="0px" right="0px" top="0px"/>
+  </Label>
+  <Button cursor="0" name="btnCloseWindow" parent="view" prefHeight="20px" prefWidth="120px" text="Закрыть окно">
+    <AnchorsPaneConstraints bottom="13px" height="20px" right="8px" width="120px"/>
+  </Button>
+  <AnchorsPane background="#ffffff" cursor="0" name="panel" parent="view" prefHeight="340px" prefWidth="742px">
+    <AnchorsPaneConstraints bottom="41px" left="0px" right="0px" top="180px"/>
+  </AnchorsPane>
+  <ModelGrid cursor="0" name="modelGrid1" parent="panel" prefHeight="270px" prefWidth="722px">
+    <AnchorsPaneConstraints bottom="40px" left="10px" right="10px" top="30px"/>
+    <ModelGridColumn name="colTask" title="Задача" width="120px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colExecStage" title="Ход выполнения" width="120px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colSecStatus" title="Статус" width="120px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStartTime" title="Время постановки" width="120px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colArriveTime" title="Время прибытия" width="120px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colEndTime" title="Время завершения" width="120px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+  <Button cursor="0" name="btnAddTask" parent="panel" prefHeight="20px" prefWidth="90px" text="Добавить">
+    <AnchorsPaneConstraints bottom="12px" height="20px" left="10px" width="90px"/>
+  </Button>
+  <Button cursor="0" name="btnChangeTask" parent="panel" prefHeight="20px" prefWidth="90px" text="Изменить">
+    <AnchorsPaneConstraints bottom="12px" height="20px" left="110px" width="90px"/>
+  </Button>
+  <Button cursor="0" name="btnChangeWarrant" parent="panel" prefHeight="20px" prefWidth="120px" text="Изменить наряд">
+    <AnchorsPaneConstraints bottom="12px" height="20px" right="143px" width="120px"/>
+  </Button>
+  <Button cursor="0" name="btnCloseWarrant" parent="panel" prefHeight="20px" prefWidth="120px" text="Закрыть наряд">
+    <AnchorsPaneConstraints bottom="12px" height="20px" right="13px" width="120px"/>
+  </Button>
+  <Label background="#0099ff" cursor="0" foreground="#ffffff" horizontalAlignment="0" horizontalTextPosition="0" name="lbCaption11" opaque="true" parent="panel" prefHeight="23px" prefWidth="742px" text="Задачи наряда">
+    <font family="Monospaced" size="12" style="1"/>
+    <AnchorsPaneConstraints height="23px" left="0px" right="0px" top="0px"/>
+  </Label>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlWarrantCI" parent="view" prefHeight="170px" prefWidth="375px">
+    <AnchorsPaneConstraints height="170px" left="0px" top="0px" width="375px"/>
+  </AnchorsPane>
+  <Label cursor="0" name="label" parent="pnlWarrantCI" prefHeight="20px" prefWidth="110px" text="Позывной">
+    <AnchorsPaneConstraints height="20px" left="20px" top="110px" width="110px"/>
+  </Label>
+  <Label cursor="0" name="label1" parent="pnlWarrantCI" prefHeight="20px" prefWidth="130px" text="Начало дежурства">
+    <AnchorsPaneConstraints height="20px" left="20px" top="90px" width="130px"/>
+  </Label>
+  <Label cursor="0" name="label2" parent="pnlWarrantCI" prefHeight="20px" prefWidth="40px" text="Силы">
+    <AnchorsPaneConstraints height="20px" left="20px" top="70px" width="40px"/>
+  </Label>
+  <Label cursor="0" name="label3" parent="pnlWarrantCI" prefHeight="20px" prefWidth="40px" text="ТС">
+    <AnchorsPaneConstraints height="20px" left="20px" top="50px" width="40px"/>
+  </Label>
+  <Label cursor="0" name="label5" parent="pnlWarrantCI" prefHeight="20px" prefWidth="40px" text="Пост">
+    <AnchorsPaneConstraints height="20px" left="20px" top="30px" width="40px"/>
+  </Label>
+  <Label cursor="0" name="lbPost" parent="pnlWarrantCI" prefHeight="20px" prefWidth="215px" text="label7">
+    <font family="Monospaced" size="11" style="1"/>
+    <AnchorsPaneConstraints height="20px" left="150px" top="30px" width="215px"/>
+  </Label>
+  <Label cursor="0" name="lbTC" parent="pnlWarrantCI" prefHeight="20px" prefWidth="215px" text="label7">
+    <font family="Monospaced" size="11" style="1"/>
+    <AnchorsPaneConstraints height="20px" left="150px" top="50px" width="215px"/>
+  </Label>
+  <Label cursor="0" name="lbForces" parent="pnlWarrantCI" prefHeight="20px" prefWidth="215px" text="label7">
+    <font family="Monospaced" size="11" style="1"/>
+    <AnchorsPaneConstraints height="20px" left="150px" top="70px" width="215px"/>
+  </Label>
+  <Label cursor="0" name="lbStartTime" parent="pnlWarrantCI" prefHeight="20px" prefWidth="215px" text="label7">
+    <font family="Monospaced" size="11" style="1"/>
+    <AnchorsPaneConstraints height="20px" left="150px" top="90px" width="215px"/>
+  </Label>
+  <Label cursor="0" name="lbNic" parent="pnlWarrantCI" prefHeight="20px" prefWidth="215px" text="label7">
+    <font family="Monospaced" size="11" style="1"/>
+    <AnchorsPaneConstraints height="20px" left="150px" top="110px" width="215px"/>
+  </Label>
+  <Label cursor="0" name="lbStatus" parent="pnlWarrantCI" prefHeight="20px" prefWidth="345px" text="Статус">
+    <font family="Monospaced" size="11" style="1"/>
+    <AnchorsPaneConstraints bottom="6px" height="20px" left="20px" width="345px"/>
+  </Label>
+  <Label background="#0099ff" cursor="0" foreground="#ffffff" horizontalAlignment="0" horizontalTextPosition="0" name="lbCaption" opaque="true" parent="pnlWarrantCI" prefHeight="23px" prefWidth="375px" text="Наряд">
+    <font family="Monospaced" size="12" style="1"/>
+    <AnchorsPaneConstraints height="23px" left="0px" right="0px" top="0px"/>
+  </Label>
+</layout>
