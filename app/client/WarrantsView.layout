@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="300px" prefWidth="400px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlWarrants" parent="view" prefHeight="300px" prefWidth="400px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <Label cursor="0" name="lblWarrants" parent="pnlWarrants" prefHeight="20px" prefWidth="405px" text="Наряды">
+    <AnchorsPaneConstraints height="20px" left="0px" right="-5px" top="0px"/>
+  </Label>
+  <ToolBar cursor="0" name="tlbWarrants" parent="pnlWarrants" prefHeight="20px" prefWidth="405px">
+    <AnchorsPaneConstraints height="20px" left="0px" right="-5px" top="20px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" icon="icons/phone_call_action.png" name="btnWarrantCall" parent="tlbWarrants" prefHeight="20px" prefWidth="20px" toolTipText="Позвонить"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="grdWarrants" parent="pnlWarrants" prefHeight="261px" prefWidth="405px">
+    <AnchorsPaneConstraints bottom="-1px" left="0px" right="-5px" top="40px"/>
+    <CheckGridColumn name="column" resizable="true"/>
+    <ModelGridColumn name="colWarrantDate" title="Дата наряда" width="75px">
+      <ModelDate dateFormat="dd.MM.yyyy"/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colСallsign" title="Позывной" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colActive" title="Выпущен на маршрут" width="75px">
+      <ModelCheckBox/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colNum" title="Номер наряда" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTransportRegnum" title="Гос. №" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colPostNum" title="Пост" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colPostWarrantKind" title="Вид наряда" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTaskTypeDescription" title="Тип задачи" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colTaskIncidentDescription" title="Происшествие" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStaff1" title="Сотрудник 1" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStaff2" title="Сотрудник 2" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStaff3" title="Сотрудник 3" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStatus" title="Статус" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colDistance" title="Расстояние" width="75px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+</layout>

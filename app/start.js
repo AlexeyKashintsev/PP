@@ -5,8 +5,8 @@
 // this === global
 (function () {
     function ready() {
-        P.require(['WarrantCard'], function(){
-            var m = new WarrantCard();
+        P.require(['OperInfoView'], function(){
+            var m = new OperInfoView();
             m.show();
         }, function(e){
             P.Logger.severe(e);

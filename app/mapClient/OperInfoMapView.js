@@ -10,6 +10,7 @@ function OperInfoMapView() {
     var mapOperInfo;
     var mapObjects = new MapObjects();
     self.API = mapObjects.getAPI();
+    self.setAPI = mapObjects.setAPI;
     
     function show(panel) {
         P.require('mapClient/libs/leaflet.js', function () {

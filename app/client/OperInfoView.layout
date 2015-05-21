@@ -20,16 +20,16 @@
   <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="grdTasks" parent="pnTasks" prefHeight="179px" prefWidth="445px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="20px"/>
     <CheckGridColumn name="column" resizable="true"/>
-    <ModelGridColumn name="colCreateDate" title="Время создания" width="103px">
+    <ModelGridColumn name="colCreateDate" title="Время создания" width="105px">
       <ModelDate dateFormat="dd.MM.yyyy HH:mm:ss"/>
     </ModelGridColumn>
-    <ModelGridColumn name="colTaskType" title="Тип задачи" width="103px">
+    <ModelGridColumn name="colTaskType" title="Тип задачи" width="105px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colIncident" title="Происшествие" width="104px">
+    <ModelGridColumn name="colIncident" title="Происшествие" width="106px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colStatus" title="Статус" width="103px">
+    <ModelGridColumn name="colStatus" title="Статус" width="105px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
   </ModelGrid>
@@ -129,7 +129,7 @@
   <ModelGrid cursor="0" deletable="false" editable="false" name="grdSubDivisions" parent="pnlSubdivisionsTree" prefHeight="88px" prefWidth="445px" showHorizontalLines="false" showOddRowsInOtherColor="false" showVerticalLines="false">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="40px"/>
     <CheckGridColumn name="colChecks" resizable="true"/>
-    <ModelGridColumn name="colName" title="colName" width="413px">
+    <ModelGridColumn name="colName" title="colName" width="421px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
   </ModelGrid>

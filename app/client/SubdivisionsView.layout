@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="300px" prefWidth="400px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlSubdivisionsTree" parent="view" prefHeight="300px" prefWidth="400px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <Label cursor="0" name="lblSubdivisions" parent="pnlSubdivisionsTree" prefHeight="20px" prefWidth="400px" text="Подразделения">
+    <AnchorsPaneConstraints height="20px" left="0px" top="0px" width="400px"/>
+  </Label>
+  <ToolBar cursor="0" name="tlbSubdivisions" parent="pnlSubdivisionsTree" prefHeight="20px" prefWidth="405px">
+    <AnchorsPaneConstraints height="20px" left="0px" right="-5px" top="20px"/>
+  </ToolBar>
+  <Button cursor="0" focusable="false" icon="icons/phone_call_action.png" name="btnSubdivisionCall" parent="tlbSubdivisions" prefHeight="20px" prefWidth="20px" toolTipText="Позвонить"/>
+  <ModelGrid cursor="0" deletable="false" editable="false" name="grdSubDivisions" parent="pnlSubdivisionsTree" prefHeight="260px" prefWidth="400px" showHorizontalLines="false" showOddRowsInOtherColor="false" showVerticalLines="false">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="40px"/>
+    <CheckGridColumn name="colChecks" resizable="true"/>
+    <ModelGridColumn name="colName" title="Подразделение" width="376px">
+      <ModelFormattedField format=""/>
+    </ModelGridColumn>
+  </ModelGrid>
+</layout>

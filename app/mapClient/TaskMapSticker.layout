@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><layout locationByPlatform="false" maximizable="false" minimizable="false" resizable="false" title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="160px" prefWidth="290px"/>
+  <Label cursor="0" name="label" parent="view" prefHeight="20px" prefWidth="70px" text="Тип">
+    <AnchorsPaneConstraints height="20px" left="10px" top="10px" width="70px"/>
+  </Label>
+  <Label cursor="0" name="label1" parent="view" prefHeight="20px" prefWidth="80px" text="Состояние">
+    <AnchorsPaneConstraints height="20px" left="10px" top="40px" width="80px"/>
+  </Label>
+  <Label cursor="0" name="label2" parent="view" prefHeight="20px" prefWidth="90px" text="Проишествие">
+    <AnchorsPaneConstraints height="20px" left="10px" top="70px" width="90px"/>
+  </Label>
+  <Label cursor="0" name="label3" parent="view" prefHeight="20px" prefWidth="90px" text="Время создания">
+    <AnchorsPaneConstraints height="20px" left="10px" top="100px" width="90px"/>
+  </Label>
+  <ModelCombo cursor="0" editable="true" name="cmbTaskStatus" nullable="false" parent="view" prefHeight="20px" prefWidth="147px" selectOnly="true">
+    <AnchorsPaneConstraints height="20px" left="100px" right="43px" top="40px"/>
+  </ModelCombo>
+  <ModelFormattedField cursor="0" editable="false" name="mfType" parent="view" prefHeight="20px" prefWidth="177px" text="modelFormattedField">
+    <AnchorsPaneConstraints height="20px" left="100px" right="13px" top="10px"/>
+  </ModelFormattedField>
+  <ModelFormattedField cursor="0" editable="false" name="mfincident" parent="view" prefHeight="20px" prefWidth="177px" text="modelFormattedField1">
+    <AnchorsPaneConstraints height="20px" left="100px" right="13px" top="70px"/>
+  </ModelFormattedField>
+  <Button cursor="0" icon="icons/arrow_right.png" name="btnApplyStatus" parent="view" prefHeight="20px" prefWidth="30px">
+    <AnchorsPaneConstraints height="20px" right="13px" top="40px" width="30px"/>
+  </Button>
+  <ModelDate cursor="0" name="mdCreationTime" parent="view" prefHeight="20px" prefWidth="177px">
+    <AnchorsPaneConstraints height="20px" left="100px" right="13px" top="100px"/>
+  </ModelDate>
+</layout>

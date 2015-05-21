@@ -6,9 +6,10 @@ function OperInfoView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
 
-    var operInfoProxy = new P.ServerModule("OperInfoProxy");
+    operInfoProxy = new P.ServerModule("OperInfoProxy");
 
     var operInfoMapView = new OperInfoMapView();
+    operInfoMapView.setAPI(self);
 
     self.show = function () {
         initCombos();
@@ -67,7 +68,15 @@ function OperInfoView() {
         initWarrantGrid();
         //initSubdivisionGrid();
     }
-
+    
+    function getHexColor(aDecColor) {
+        var res = ((16777216 - aDecColor)).toString(16);
+        var zero = '';
+        for (var j = 0; j < 6 - res.length; j++)
+            zero += '0';
+        return "#" + zero + res;
+    }
+    
     var listT = [], viewT = [], incidents = [], listenIdTask = [];
     function initTaskGrid() {
         listT = [];
@@ -83,6 +92,18 @@ function OperInfoView() {
                         if (!incidents[task.incident.id])
                             incidents[task.incident.id] = task.incident;
                     });
+                    form.grdTasks.onRender = function(event) {
+                        try {
+                            if (event.source.field === 'incident.description')
+                                event.cell.background = new P.Color(getHexColor(event.object.incident.color));
+                            else
+                                event.cell.background = new P.Color(getHexColor(event.object.exec.color));
+                        } catch (e) {
+                            console.log('Ошибка применения цвета ' + e);
+                        }
+                    };
+                    //form.grdTasks.oddRowsColor = P.Color("#552255");
+
                     form.grdTasks.data = listT;
                     form.grdTasks.colCreateDate.field = "createdDateTime";
                     form.grdTasks.colTaskType.field = "type.description";
@@ -92,6 +113,15 @@ function OperInfoView() {
                 function (e) {
                     P.Logger.severe(e);
                 });
+    }
+    
+    self.selectTask = function(aTask) {
+        form.grdTasks.clearSelection();
+        if (typeof aTask === 'object')
+            form.grdTasks.makeVisible(aTask, true);
+        else
+            form.grdTasks.select(); //TODO THIS
+        
     }
 
     var listW = [], warrantsBySubdivId = [], view = [], viewId = [], kinds = [];
@@ -138,8 +168,28 @@ function OperInfoView() {
                     P.Logger.severe(e);
                 });
     }
+    
+    var warrantCard;
+    form.grdWarrants.onMouseClicked = function(event) {
+        if (event.clickCount === 2) {
+            if (!warrantCard)
+                warrantCard = new WarrantCard(self);
+            warrantCard.setWarrant(form.grdWarrants.selected[0]);
+            warrantCard.showModal();
+        }
+    };
 
     var subdivisions = null;
+    self.getSubdivisionById = function(aSubId) {
+        var res = false;
+        if (subdivisions)
+            subdivisions.forEach(function(subdivision) {
+                if (subdivision.id === aSubId)
+                    res = subdivision;
+            });
+        return res;
+    };
+    
     function initSubdivisionGrid() {
         operInfoProxy.getPoliceSubdivisions(
                 function (subdivs) {
@@ -157,6 +207,7 @@ function OperInfoView() {
     function prepareTreeGridSource(objects) {
         var treeGridSource = [], nodes = [];
         objects.forEach(function (obj) {
+            operInfoMapView.API.newSubdivision(obj);
             if (!nodes[obj.id]) {
                 nodes[obj.id] = {
                     node: obj,
@@ -230,6 +281,7 @@ function OperInfoView() {
                     P.Logger.severe(e);
                 });
     };
+    
     form.btnChangeSelectedWarrantsStatus.onActionPerformed = function (event) {
         var selectedWarrants = form.grdWarrants.selected;
         if (!selectedWarrants.length) {
