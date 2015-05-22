@@ -11,9 +11,13 @@ function SubdivisionsView() {
         form.show();
     };
     
+    this.showOnPanel = function (panel) {
+        panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
+    };
+    
     var subdivisions = null;
     function initSubdivisionGrid() {
-        operInfoProxy.getPoliceSubdivisions(
+        oc.getPoliceSubdivisions(
                 function (subdivs) {
                     subdivisions = prepareTreeGridSource(subdivs);
                     form.grdSubDivisions.data = subdivisions;

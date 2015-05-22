@@ -17,4 +17,8 @@ function ServerWebSocket() {
             Pusher.broadcast(aTag, JSON.stringify(msg));
         }
     };
+    
+    var socket = new P.WebSocketServerSession();
+    var socket2 = new P.WebSocketSession();
+//    socket2.
 }

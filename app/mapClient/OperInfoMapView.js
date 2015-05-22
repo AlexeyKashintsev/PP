@@ -6,8 +6,8 @@ function OperInfoMapView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
 
-    var operInfoProxy = new P.ServerModule("OperInfoProxy");
-    var mapOperInfo;
+//    var oc = new P.ServerModule("OperInfoProxy");
+//    mapOperInfo = {};
     var mapObjects = new MapObjects();
     self.API = mapObjects.getAPI();
     self.setAPI = mapObjects.setAPI;
@@ -37,7 +37,7 @@ function OperInfoMapView() {
         show(panel);
     };
 
-    function initMap() {        
+    function initMap() {
         function init(center) {
             var defaultCenter = [55.7522, 37.6155]; // Moscow      
             var tilesLayer = new L.TileLayer(
@@ -76,7 +76,7 @@ function OperInfoMapView() {
             mapObjects.setMap(mapOperInfo);
         }
 
-        operInfoProxy.getDownTownCoordinates(
+        oc.getDownTownCoordinates(
                 function (center) {
                     init(center);
                 },

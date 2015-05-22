@@ -5,7 +5,7 @@ P.require(['server/libs/infor_.js', 'server/libs/geo.js']);
  * @public 
  * @constructor
  */
-function OperInfoProxy() {
+function OperInfoProxy_() {
     var self = this, model = P.loadModel(this.constructor.name);
 
     this.getUser = function (onSuccess, onFailure) {

@@ -6,7 +6,7 @@ function OperInfoView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
 
-    operInfoProxy = new P.ServerModule("OperInfoProxy");
+    var oc_ = new OperControl();
 
     var operInfoMapView = new OperInfoMapView();
     operInfoMapView.setAPI(self);
@@ -30,7 +30,7 @@ function OperInfoView() {
 
     var taskExecStatuses = [];
     function initTaskStatusCombo() {
-        operInfoProxy.getPoliceTaskExec(
+        oc.getPoliceTaskExec(
                 function (statuses) {
                     taskExecStatuses = [];
                     statuses.forEach(function (status) {
@@ -47,7 +47,7 @@ function OperInfoView() {
 
     var warrantStatuses = [];
     function initWarrantStatusCombo() {
-        operInfoProxy.getTransportStatuses(
+        oc.getTransportStatuses(
                 function (statuses) {
                     warrantStatuses = [];
                     statuses.forEach(function (status) {
@@ -83,7 +83,7 @@ function OperInfoView() {
         viewT = [];
         incidents = [];
         listenIdTask = [];
-        operInfoProxy.getFilteredPoliceTasks(
+        oc.getFilteredPoliceTasks(
                 function (tasks) {
                     tasks.forEach(function (task) {
                         operInfoMapView.API.newTask(task);
@@ -131,7 +131,7 @@ function OperInfoView() {
         view = [];
         viewId = [];
         kinds = [];
-        operInfoProxy.getPoliceWarrants(
+        oc.getPoliceWarrants(
                 function (warrants) {
                     warrants.forEach(function (warrant) {
                         listW.push(warrant);
@@ -191,7 +191,7 @@ function OperInfoView() {
     };
     
     function initSubdivisionGrid() {
-        operInfoProxy.getPoliceSubdivisions(
+        oc.getPoliceSubdivisions(
                 function (subdivs) {
                     subdivisions = prepareTreeGridSource(subdivs);
                     form.grdSubDivisions.data = subdivisions;
@@ -271,7 +271,7 @@ function OperInfoView() {
             return;
         }
 
-        operInfoProxy.changePoliceTasksStatus(
+        oc.changePoliceTasksStatus(
                 selectedTasks,
                 selectedTaskStatus,
                 function () {
@@ -294,7 +294,7 @@ function OperInfoView() {
             return;
         }
 
-        operInfoProxy.changePoliceWarrantsStatus(
+        oc.changePoliceWarrantsStatus(
                 selectedWarrants,
                 selectedWarrantStatus,
                 function () {
@@ -312,7 +312,7 @@ function OperInfoView() {
             alert("Необходимо выбрать происшествие и наряд");
             return;
         }
-        operInfoProxy.setWarrant(
+        oc.setWarrant(
                 selectedWarrants[0].id,
                 selectedTasks[0].id,
                 new Date(),
@@ -333,7 +333,7 @@ function OperInfoView() {
         }
         if (selectedWarrants[0].curentTaskId != null &&
                 selectedWarrants[0].curentTaskId == selectedTasks[0].id) {
-            operInfoProxy.removeWarrant(
+            oc.removeWarrant(
                     selectedWarrants[0].id,
                     selectedTasks[0].id,
                     new Date(),
@@ -354,7 +354,7 @@ function OperInfoView() {
             alert("Необходимо выбрать одно происшествие");
             return;
         }
-        operInfoProxy.removeWarrant(
+        oc.removeWarrant(
                 null,
                 selectedTasks[0].id,
                 new Date(),

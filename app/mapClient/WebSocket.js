@@ -9,23 +9,23 @@ function WebSocket() {
     var socket = new WebSocket("ws://javascript.ru/ws");
     
     socket.onopen = function() {
-        alert("Соединение установлено.");
+        console.log("Соединение установлено.");
     };
 
       socket.onclose = function(event) {
         if (event.wasClean) {
-          alert('Соединение закрыто чисто');
+          console.log('Соединение закрыто чисто');
         } else {
-          alert('Обрыв соединения'); // например, "убит" процесс сервера
+          console.log('Обрыв соединения'); // например, "убит" процесс сервера
         }
-        alert('Код: ' + event.code + ' причина: ' + event.reason);
+        console.log('Код: ' + event.code + ' причина: ' + event.reason);
     };
 
       socket.onmessage = function(event) {
-        alert("Получены данные " + event.data);
+        console.log("Получены данные " + event.data);
     };
 
       socket.onerror = function(error) {
-        alert("Ошибка " + error.message);
+        console.log("Ошибка " + error.message);
     };
 }

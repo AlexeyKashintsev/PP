@@ -8,17 +8,14 @@ function OperControl() {
     
     oc = self;
     
-    if (!operInfoProxy)
-        operInfoProxy = new P.ServerModule("OperInfoProxy");
-    
     this.getUser = function (onSuccess, onFailure) {
-        var securityWS = new SecurityWS();
+        var securityWS = new P.ServerModule('SecurityWS');
         securityWS.getUser(onSuccess, onFailure);
     };
 
     this.getDownTownCoordinates = function (onSuccess, onFailure) {
         var workplaceId = 47233086; // OperationalInformation workplace identifier
-        var systemParameterListWS = new SystemParameterListWS();
+        var systemParameterListWS = new P.ServerModule('SystemParameterListWS');
         systemParameterListWS.getWorkPlaceRuntimeParameters(workplaceId,
                 function (response) {
                     var params = response.split(';');
@@ -38,37 +35,37 @@ function OperControl() {
     };
 
     this.getTransportStatuses = function (onSuccess, onFailure) {
-        var transportStatusWS = new TransportStatusWS();
+        var transportStatusWS = new P.ServerModule('TransportStatusWS');
         transportStatusWS.getList(onSuccess, onFailure);
     };
 
     this.getPoliceTaskExec = function (onSuccess, onFailure) {
-        var policeTaskExecWS = new PoliceTaskExecWS();
+        var policeTaskExecWS = new P.ServerModule('PoliceTaskExecWS');
         policeTaskExecWS.getList(onSuccess, onFailure);
     };
 
     this.getDispositionPlans = function (onSuccess, onFailure) {
-        var dispositionPlanWS = new DispositionPlanWS();
+        var dispositionPlanWS = new P.ServerModule('DispositionPlanWS');
         dispositionPlanWS.getList(onSuccess, onFailure);
     };
 
     this.getPolicePosts = function (dispositionPlanId, onSuccess, onFailure) {
-        var policePostWS = new PolicePostWS();
+        var policePostWS = new P.ServerModule('PolicePostWS');
         policePostWS.getList(dispositionPlanId, onSuccess, onFailure);
     };
 
     this.getPolicePost = function (policePostId, onSuccess, onFailure) {
-        var policePostWS = new PolicePostWS();
+        var policePostWS = new P.ServerModule('PolicePostWS');
         policePostWS.getCurrentObject(policePostId, onSuccess, onFailure);
     };
 
     this.getPoliceTasks = function (onSuccess, onFailure) {
-        var policeTaskWS = new PoliceTaskWS();
+        var policeTaskWS = new P.ServerModule('PoliceTaskWS');
         policeTaskWS.getList(onSuccess, onFailure);
     };
 
     this.getFilteredPoliceTasks = function (onSuccess, onFailure) {
-        var policeTaskWS = new PoliceTaskWS();
+        var policeTaskWS = new P.ServerModule('PoliceTaskWS');
         policeTaskWS.getList(
                 function (tasks) {
                     var filtered = [];
@@ -85,7 +82,7 @@ function OperControl() {
     };
 //    TODO Что-то здесь хрень
     this.getPoliceWarrants = function (onSuccess, onFailure) {
-        var policeWarrantUIWS = new PoliceWarrantUIWS();
+        var policeWarrantUIWS = new P.ServerModule('PoliceWarrantUIWS');
         policeWarrantUIWS.getList(
                 function (warrants) {
                     onSuccess(warrants.map(function(warrant){
@@ -97,7 +94,7 @@ function OperControl() {
     };
 
     this.getPoliceSubdivisions = function (onSuccess, onFailure) {
-        var policeSubdivisionWS = new PoliceSubdivisionWS();
+        var policeSubdivisionWS = new P.ServerModule('PoliceSubdivisionWS');
         policeSubdivisionWS.getList(onSuccess, onFailure);
     };
 
@@ -116,11 +113,11 @@ function OperControl() {
             }
         }
 
-        var policeTaskWS = new PoliceTaskWS();
+        var policeTaskWS = new P.ServerModule('PoliceTaskWS');
         policeTasks.forEach(function (policeTask) {
             policeTask.createdDateTime = du.dateToString(policeTask.createdDateTime);
             policeTask.exec = status;
-            policeTaskWS.save(
+            PoliceTaskWS.save(
                     policeTask,
                     function () {
                         tryComplete();
@@ -149,9 +146,9 @@ function OperControl() {
             }
         }
 
-        var transportWS = new TransportWS();
+        var transportWS = new P.ServerModule('TransportWS');
         policeWarrants.forEach(function (policeWarrant) {
-            transportWS.updateTransportStatusById(
+            TransportWS.updateTransportStatusById(
                     policeWarrant.transportId,
                     status.id,
                     function () {
@@ -167,7 +164,7 @@ function OperControl() {
     };
 
     this.setWarrant = function (warrantId, taskId, dt, onSuccess, onFailure) {
-        var policeWarrantWS = new PoliceWarrantWS();
+        var policeWarrantWS = new P.ServerModule('PoliceWarrantWS');
         policeWarrantWS.updateWarrantTaskById(
                 warrantId,
                 taskId,
@@ -177,7 +174,7 @@ function OperControl() {
     };
     
     this.removeWarrant = function (warrantId, taskId, dt, onSuccess, onFailure) {
-        var policeWarrant2TaskLinkWS = new PoliceWarrant2TaskLinkWS();
+        var policeWarrant2TaskLinkWS = new P.ServerModule('PoliceWarrant2TaskLinkWS');
         policeWarrant2TaskLinkWS.closeWarrant2Task(
                 warrantId,
                 taskId,

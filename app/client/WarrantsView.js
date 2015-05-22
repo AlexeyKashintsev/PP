@@ -11,6 +11,10 @@ function WarrantsView() {
         form.show();
     };
     
+    this.showOnPanel = function (panel) {
+        panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
+    };
+    
     var listW = [], warrantsBySubdivId = [], view = [], viewId = [], kinds = [];
     function initWarrantGrid() {
         listW = [];
@@ -18,7 +22,7 @@ function WarrantsView() {
         view = [];
         viewId = [];
         kinds = [];
-        operInfoProxy.getPoliceWarrants(
+        oc.getPoliceWarrants(
                 function (warrants) {
                     warrants.forEach(function (warrant) {
                         listW.push(warrant);

@@ -3,9 +3,14 @@ P.require(["server/libs/http.js", "server/libs/dateUtils.js"]);
  * 
  * @author Алексей
  * @constructor
+ * @public
  */ 
-function OperInfoProxy_1() {
+function OperInfoProxy() {
     var self = this, model = P.loadModel(this.constructor.name);
+    
+    self.request = function(aService, aMethod, aParams) {
+        
+    };
     
     function InvocationContext() {
         this.clientIPAddress = '192.169.1.49';
@@ -37,17 +42,10 @@ function OperInfoProxy_1() {
                             P.Logger.severe(e);
                     });
     };
+    
+    var API = {};
 
-    self.SecurityWS = new function() {
-        var iContext = new InvocationContext();
-        var serviceName = 'SecurityWS';
-
-        this.getUser = function (onSuccess, onFailure) {
-            HTTPrequest(serviceName, 'getUser', [], onSuccess, onFailure);
-        };
-    }();
-
-    self.SystemParameterListWS = function() {
+    API.SystemParameterListWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'SystemParameterListWS';
 
@@ -56,7 +54,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.TransportStatusWS = function() {
+    API.TransportStatusWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'TransportStatusWS';
 
@@ -71,7 +69,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.PoliceTaskExecWS = function() {
+    API.PoliceTaskExecWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PoliceTaskExecWS';
 
@@ -86,7 +84,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.DispositionPlanWS = function() {
+    API.DispositionPlanWS = function() {
         var self = this;
         var iContext = new InvocationContext();
         var serviceName = 'DispositionPlanWS';
@@ -103,7 +101,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.PolicePostWS = function() {
+    API.PolicePostWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PolicePostWS';
 
@@ -122,7 +120,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.PoliceTaskWS = function() {
+    API.PoliceTaskWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PoliceTaskWS';
 
@@ -141,7 +139,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.PoliceWarrantUIWS = function() {
+    API.PoliceWarrantUIWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PoliceWarrantUIWS';
 
@@ -156,7 +154,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.PoliceWarrantWS = function() {
+    API.PoliceWarrantWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PoliceWarrantWS';
 
@@ -166,7 +164,7 @@ function OperInfoProxy_1() {
     }();
 
 
-    self.PoliceSubdivisionWS = function() {
+    API.PoliceSubdivisionWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PoliceSubdivisionWS';
 
@@ -180,7 +178,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.TransportWS = function() {
+    API.TransportWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'TransportWS';
 
@@ -189,7 +187,7 @@ function OperInfoProxy_1() {
         };
     }();
 
-    self.PoliceWarrant2TaskLinkWS = function() {
+    API.PoliceWarrant2TaskLinkWS = function() {
         var iContext = new InvocationContext();
         var serviceName = 'PoliceWarrant2TaskLinkWS';
 

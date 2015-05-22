@@ -11,9 +11,13 @@ function TasksView() {
         form.show();
     };
     
+    this.showOnPanel = function (panel) {
+        panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
+    };
+    
     var taskExecStatuses = [];
     function initTaskStatusCombo() {
-        operInfoProxy.getPoliceTaskExec(
+        oc.getPoliceTaskExec(
                 function (statuses) {
                     taskExecStatuses = [];
                     statuses.forEach(function (status) {
@@ -34,7 +38,7 @@ function TasksView() {
         viewT = [];
         incidents = [];
         listenIdTask = [];
-        operInfoProxy.getFilteredPoliceTasks(
+        oc.getFilteredPoliceTasks(
                 function (tasks) {
                     tasks.forEach(function (task) {
                         operInfoMapView.API.newTask(task);

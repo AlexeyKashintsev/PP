@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
   <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="300px" prefWidth="400px"/>
   <AnchorsPane background="#ffffff" cursor="0" name="pnTasks" parent="view" prefHeight="300px" prefWidth="400px">
-    <AnchorsPaneConstraints bottom="0px" height="300px" left="0px" right="0px" top="0px" width="400px"/>
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
   </AnchorsPane>
   <Label cursor="0" name="lblTasks" parent="pnTasks" prefHeight="20px" prefWidth="400px" text="Происшествия">
     <AnchorsPaneConstraints height="20px" left="0px" right="0px" top="0px"/>

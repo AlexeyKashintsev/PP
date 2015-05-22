@@ -114,17 +114,17 @@ jsl.format = function(json) {
         return res;
     };
     
-    var operInfoProxy = new P.ServerModule("OperInfoProxy");
+    //var oc = new P.ServerModule("OperInfoProxy");
 
     var methodsList = [];
-    for (var j in operInfoProxy)
+    for (var j in oc)
         methodsList.push({methodName: j});
 
     form.mcMethods.displayList = methodsList;
     form.mcMethods.displayField = "methodName";
     
     form.button.onActionPerformed = function(event) {
-        operInfoProxy[form.mcMethods.text](function(aResult) {
+        oc[form.mcMethods.text](function(aResult) {
             form.result.text = jsl.format(JSON.stringify(aResult));
             
             form.res.data = prepareArray(aResult);;
