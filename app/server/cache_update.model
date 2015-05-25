@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <parameters>
+    <parameter description="" name="url" nullable="true" parameterMode="1" precision="0" scale="0" selectionForm="null" signed="true" size="0" type="12" typeName="VARCHAR"/>
+    <parameter description="" name="response" nullable="true" parameterMode="1" precision="0" scale="0" selectionForm="null" signed="true" size="0" type="12" typeName="VARCHAR"/>
+  </parameters>
+  <parametersEntity entityHeight="200" entityIconified="false" entityLocationX="8" entityLocationY="7" entityWidth="150"/>
+  <entity Title="" entityHeight="200" entityIconified="false" entityId="143253704583442" entityLocationX="186" entityLocationY="6" entityWidth="150" tableAlias="t1" tableName="cache" tableSchemaName=""/>
+  <relation leftEntityId="-1" leftEntityParameterName="response" rightEntityFieldName="response" rightEntityId="143253704583442"/>
+  <relation leftEntityId="-1" leftEntityParameterName="url" rightEntityFieldName="url" rightEntityId="143253704583442"/>
+</datamodel>

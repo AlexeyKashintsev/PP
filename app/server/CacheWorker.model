@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><datamodel>
+  <entity Name="cache_update" Title="" entityHeight="200" entityIconified="false" entityId="143253737565434" entityLocationX="290" entityLocationY="74" entityWidth="150" queryId="cache_update" tableName="" tableSchemaName=""/>
+  <entity Name="cache_all" Title="" entityHeight="200" entityIconified="false" entityId="143253737405287" entityLocationX="106" entityLocationY="65" entityWidth="150" queryId="cache_all" tableName="" tableSchemaName=""/>
+</datamodel>

@@ -1,0 +1,18 @@
+WITH new_values (url, response) as (
+  values 
+     (:url, :response)
+),
+upsert as
+( 
+    update cache c 
+        set response = nv.response
+    FROM new_values nv
+    WHERE c.url = nv.url
+    RETURNING c.*
+)
+INSERT INTO cache (url, response)
+SELECT url, response
+FROM new_values
+WHERE NOT EXISTS (SELECT 1 
+                  FROM upsert up 
+                  WHERE up.url = new_values.url)
