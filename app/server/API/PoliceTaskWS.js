@@ -16,10 +16,44 @@ function PoliceTaskWS() {
             loadDeletedItems: 0,
             activeOnDate: du.dateToString(new Date(Date.now()))
         };
-        HTTPrequest(serviceName, 'getList', [criteria], onSuccess, onFailure);
+        HTTPrequest(serviceName, 'getList', [criteria]
+            , function (tasks) {
+                    var filtered = [];
+                    var dt = du.incDay(new Date(Date.now()), -1);
+                    tasks.forEach(function (task) {
+                        if (!(task.exec && task.exec.code === "С" && du.stringToDate(task.createdDateTime) < dt)) {
+                            task.createdDateTime = du.stringToDate(task.createdDateTime);
+                            filtered.push(task);
+                        }
+                    });
+                    onSuccess(filtered);
+                }, onFailure);
     };
+    //TODO Check
+    this.save = function (policeTasks, onSuccess, onFailure) {
+        var expectedCalls = 0;
+        var results = {errors: [], count: 0};
+        function tryComplete(aError) {
+            if (aError)
+                results.errors[results.errors.length] = aError;
+            results.count++;
+            if (results.count === expectedCalls) {
+                if (results.errors.length === 0)
+                    onSuccess();
+                else
+                    onFailure(results.errors.join('\n'));
+            }
+        }
 
-    this.save = function (policeTask, onSuccess, onFailure) {
-        HTTPrequest(serviceName, 'save', [policeTask], onSuccess, onFailure);
+        policeTasks.forEach(function (policeTask, status) {
+            policeTask.createdDateTime = du.dateToString(policeTask.createdDateTime);
+            policeTask.exec = status;
+            HTTPrequest(serviceName, 'save', [policeTask], tryComplete, function (e) {
+                        tryComplete(e);
+                        P.Logger.severe(e);
+                    });
+        });
+        if (expectedCalls === 0)
+            onSuccess();
     };
 }

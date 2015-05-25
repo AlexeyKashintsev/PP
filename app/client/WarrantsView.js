@@ -7,12 +7,9 @@ function WarrantsView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
     
-    self.show = function () {
-        form.show();
-    };
-    
-    this.showOnPanel = function (panel) {
-        panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
+    self.show = function (panel) {
+        panel ? panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2)) : form.show();
+        initWarrantGrid();
     };
     
     var listW = [], warrantsBySubdivId = [], view = [], viewId = [], kinds = [];

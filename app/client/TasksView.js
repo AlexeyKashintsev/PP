@@ -7,12 +7,9 @@ function TasksView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
     
-    self.show = function () {
-        form.show();
-    };
-    
-    this.showOnPanel = function (panel) {
-        panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
+    self.show = function (panel) {
+        panel ? panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2)) : form.show();
+        initTaskGrid();
     };
     
     var taskExecStatuses = [];
@@ -41,7 +38,7 @@ function TasksView() {
         oc.getFilteredPoliceTasks(
                 function (tasks) {
                     tasks.forEach(function (task) {
-                        operInfoMapView.API.newTask(task);
+                        inApp.mapObjAPI.newTask(task);
                         listT.push(task);
                         listenIdTask.push(task.id);
                         if (!incidents[task.incident.id])

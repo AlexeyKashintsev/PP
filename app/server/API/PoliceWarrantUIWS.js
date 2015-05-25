@@ -16,6 +16,12 @@ function PoliceWarrantUIWS() {
             loadDeletedItems: 0,
             activeOnDate: du.dateToString(new Date(Date.now()))
         };
-        HTTPrequest(serviceName, 'getList', [criteria], onSuccess, onFailure);
+        HTTPrequest(serviceName, 'getList', [criteria]
+            , function (warrants) {
+                onSuccess(warrants.map(function (warrant) {
+                    warrant.warrantDate = du.stringToDate(warrant.warrantDate);
+                    return warrant;
+                }));
+            }, onFailure);
     };
 }

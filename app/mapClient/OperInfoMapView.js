@@ -6,11 +6,7 @@ function OperInfoMapView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
 
-//    var oc = new P.ServerModule("OperInfoProxy");
-//    mapOperInfo = {};
     var mapObjects = new MapObjects();
-    self.API = mapObjects.getAPI();
-    self.setAPI = mapObjects.setAPI;
     
     function show(panel) {
         P.require('mapClient/libs/leaflet.js', function () {
@@ -87,8 +83,12 @@ function OperInfoMapView() {
     }
 
     form.pnlMap.onComponentResized = function (event) {
-        if (mapOperInfo) {
-            mapOperInfo.invalidateSize();
+        try {
+            if (mapOperInfo) {
+                mapOperInfo.invalidateSize();
+            }
+        } catch (e) {
+            console.log('Map isn\'t initialized yet');
         }
     };
     form.button.onActionPerformed = function(event) {

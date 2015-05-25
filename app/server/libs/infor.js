@@ -14,8 +14,9 @@ var iv = new InvocationContext();
 function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext) {
     var URL = inforUrl + aService + '/' + aMethod;
     var params = aCustomInvocationContext ? [aCustomInvocationContext].concat(aParams) : [iv].concat(aParams);
-    P.Logger.info(aService + '/' + aMethod + ' request: \n' + JSON.stringify(params));
-    Http.post(URL, JSON.stringify(params),
+    var paramsStr = JSON.stringify(params);
+    P.Logger.info(aService + '/' + aMethod + ' request: \n' + paramsStr);
+    Http.post(URL, paramsStr,
                 function (aResponse) {
                     P.Logger.info(aService + '/' + aMethod + ' answer: \n' + aResponse);
                     var loaded = JSON.parse(aResponse);
