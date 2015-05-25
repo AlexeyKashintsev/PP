@@ -114,8 +114,13 @@ jsl.format = function(json) {
         return res;
     };
     
-    //var oc = new P.ServerModule("OperInfoProxy");
-
+    //var oc = new P.ServerModule("OperInfoProxy____OLD");
+    try {
+        oc.test;
+    } catch(e) {
+        new OperControl();
+    }
+    
     var methodsList = [];
     for (var j in oc)
         methodsList.push({methodName: j});

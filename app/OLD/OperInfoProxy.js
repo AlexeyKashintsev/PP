@@ -5,7 +5,7 @@ P.require(["server/libs/http.js", "server/libs/dateUtils.js"]);
  * @constructor
  * @public
  */ 
-function OperInfoProxy() {
+function OperInfoProxy____OLD() {
     var self = this, model = P.loadModel(this.constructor.name);
     
     self.request = function(aService, aMethod, aParams) {

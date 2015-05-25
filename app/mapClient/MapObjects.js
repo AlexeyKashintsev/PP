@@ -150,8 +150,10 @@ function MapObjects() {
         return operObjects;
     };
     
-    var API = null;
-    self.setAPI = function(anAPI) {
-        API = anAPI;
-    };
+    try {
+        inApp.test();
+    } catch (e) {
+        new AppConnector();
+    }
+    inApp.mapObjAPI = operObjects;
 }

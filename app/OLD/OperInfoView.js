@@ -1,7 +1,7 @@
 /**
  * 
  */
-function OperInfoView() {
+function OperInfoView____OLD() {
     var self = this
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);

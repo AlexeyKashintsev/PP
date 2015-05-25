@@ -14,13 +14,13 @@ var iv = new InvocationContext();
 var cs = {
     useDB: false,
     updateDB: true
-}
+};
 
 function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext) {
     function success(aResponse) {
         P.Logger.info(aService + '/' + aMethod + ' answer: \n' + aResponse);
         if (cs.updateDB)
-            cacheWorker.writeCache(aService + '/' + aMethod, aResponse)
+            cacheWorker.writeCache(aService + '/' + aMethod, aResponse);
         var loaded = JSON.parse(aResponse);
         if (aMethod === 'getList') 
             loaded = loaded && loaded.objList ? loaded.objList : [];

@@ -5,8 +5,8 @@
 // this === global
 (function () {
     function ready() {
-        P.require(['OperInfoView_1'], function(){
-            var m = new OperInfoView_1();
+        P.require(['OperInfoMainView'], function(){
+            var m = new OperInfoMainView();
             m.show();
         }, function(e){
             P.Logger.severe(e);
