@@ -8,23 +8,21 @@ function AppApi() {
     var self = this;
     
     function processMessage(aMsgData) {
-//        P.Logger.info('\nProcessMessage');
-        AppSessions.forEach(function(wsSession) {
-//            P.Logger.info('\nSessionType: ' + wsSession.sType + ' Session: ' + wsSession.session);
+        inAppApiSessions.forEach(function(wsSession) {
             if (wsSession.sType === aMsgData.dest) {
                 try {
                     wsSession.session.send(JSON.stringify(aMsgData));
                 } catch(e) {
                     P.Logger.warning(e + ' Probably closed session. Deleting from pool!');
-                    delete AppSessions[wsSession.id];
+                    delete inAppApiSessions[wsSession.id];
                 }
             }
         });
     }
     
     function pushSession(aWsSession, aSessionType) {
-        aWsSession.id = AppSessions.length;
-        AppSessions.push({
+        aWsSession.id = inAppApiSessions.length;
+        inAppApiSessions.push({
             session: aWsSession,
             sType: aSessionType,
             id: aWsSession.id
@@ -47,20 +45,13 @@ function AppApi() {
                         processMessage(data);
                 }
             }
-//            if (data === 'ClientAPI') {
-//                pushSession(aWsSession, 'client');
-//            } else
-//                if (data === 'ClientMapAPI') {
-//                    pushSession(aWsSession, 'map');
-//                } else 
-//                    processMessage(data);
 
             P.Logger.info('\nWebSocket message: ' + data + ' json: ' + JSON.stringify(evt));
         };
         
         aWsSession.onclose = function () {
             P.Logger.info('\nClosing wsSession Id = ' + aWsSession.id);
-            delete AppSessions[aWsSession.id];
+            delete inAppApiSessions[aWsSession.id];
             aWsSession = null;
         };
         aWsSession.onerror = function (evt) {

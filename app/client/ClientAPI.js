@@ -20,6 +20,10 @@ function ClientAPI(anApiModules, anApiType) {
     };
     
     function setTasksControl(aTasksControl) {
+        self.updateTasks = function() {
+            aTasksControl.updateTasks();
+            sendApiMsg('updateTasks');
+        };
         Object.defineProperty(self, 'selectedTasks', {
             get : function() {
                 return aTasksControl.getSelected();
@@ -61,18 +65,32 @@ function ClientAPI(anApiModules, anApiType) {
             setWarrantsControl(anApiModules.warrants);
     }
     
-    function sendApiMsg(aCommand, aData) {
+    function inAppMsgSend(apiMsg) {
+        switch (apiMsg.dest) { 
+            case 'map': {
+                mAPI.processAPI(apiMsg);
+                break;
+            }
+            case 'client': {
+                cAPI.processAPI(apiMsg);
+                break;
+            }
+            default: {
+                API.processAPI(apiMsg);
+                break;
+            }
+        }
+    }
+    
+    function sendApiMsg(aCommand, aData, aDest) {
         var apiMsg = {
-            dest: API_TYPES[anApiType].dest,
+            dest: aDest ? aDest : API_TYPES[anApiType].dest,
             command: aCommand,
             data: aData
         };
         
         try {
-            if (anApiType === 'ClientAPI')
-                mAPI.processAPI(apiMsg);
-            else
-                cAPI.processAPI(apiMsg);
+            inAppMsgSend(apiMsg);
         } catch (e) {
             wsDataFeed.send(JSON.stringify(apiMsg));
         }
@@ -81,8 +99,12 @@ function ClientAPI(anApiModules, anApiType) {
     self.processAPI = function(anApiMsg) {
         switch (anApiMsg.command) {
             case 'selectTask': {
-                self.selectedTasks = anApiMsg.data;
-                break;
+                    self.selectedTasks = anApiMsg.data;
+                    break;
+            }
+            case 'updateTasks': {
+                    self.updateTasks();
+                    break;
             }
         }
     };

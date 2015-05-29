@@ -15,6 +15,7 @@ function MapObjects() {
     }
     
     self.Marker = function (aObj) {
+        var marker;
         this.addToMap = function() {
             if (map) {
                 if (!marker) {
@@ -22,7 +23,7 @@ function MapObjects() {
                         icon: aObj.getIcon(),
                         title: aObj.getDescription()
                     };
-                    marker = L.marker(aObj.getLatLon(), params);
+                    marker = L.marker(aObj.latlon, params);
                 }
                 if (aObj.onclick) {
                     marker.on('click', aObj.onclick);
@@ -36,11 +37,20 @@ function MapObjects() {
             }
         };
         
+        Object.defineProperty(this, "latlon", {
+            get: function() {
+                return marker ? marker.getLatLng() : null;
+            },
+            set: function(aLatLon) {
+                if (marker)
+                    marker.setLatLng(aLatLon);
+            }
+        });
+        
         this.center = function() {
             centerMap(aObj);
         };
         
-        var marker;
         markers.push(this);
         this.addToMap();        
     };

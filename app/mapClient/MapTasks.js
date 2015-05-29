@@ -48,28 +48,41 @@ function MapTasks(mapObjects, mapControl) {
             return aTaskData.id;
         };
         
+        this.updateData = function(aNewTaskData) {
+            aTaskData = aNewTaskData;
+        };
+        
         this.select = function(doShowTooltip) {
             this.marker.center();
             selectedTask = this;
-        }.bind(this);;
+        }.bind(this);
+        
+        Object.defineProperty(this, "latlon", {
+            get: function() {
+                return this.getLatLon();
+            }.bind(this),
+            set: function(aLatLon) {}.bind(this)
+        });
 
         this.show();
     };
     
-    function newTask(aTaskData) {
+    function createOrUpdateTask(aTaskData) {
         if (!tasks[aTaskData.id])
             tasks[aTaskData.id] = new Task(aTaskData);
+        else
+            tasks[aTaskData.id].updateData = aTaskData;
     };
     
-    function initMapTasks() {
+    self.updateTasks = function() {
         oc.getFilteredPoliceTasks(
             function (tasks) {
-                tasks.forEach(newTask);
+                tasks.forEach(createOrUpdateTask);
             },
             function (e) {
                 P.Logger.severe(e);
             });
-    }
+    };
     
     self.setSelected = function(aTasks) {
             //tasks[typeof aTasks === 'object' ? aTasks[0].id : aTasks].select();
@@ -82,5 +95,5 @@ function MapTasks(mapObjects, mapControl) {
         return [selectedTask.getTaskData()];
     };
     
-    initMapTasks();
+    self.updateTasks();
 }

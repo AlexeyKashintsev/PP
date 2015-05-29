@@ -3,7 +3,7 @@
  * @author Алексей
  * @constructor
  */
-function ClientMapAPI(anAPIObjects) {
+function ClientMapAPI_________DEPRECATED(anAPIObjects) {
     var self = this, model = P.loadModel(this.constructor.name);
 
     mAPI = self;

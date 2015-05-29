@@ -66,4 +66,8 @@ function TasksView() {
                 form.grdTasks.makeVisible(taskData, true);
         });
     };
+    
+    self.updateTasks = function() {
+        initTaskGrid();
+    };
 }

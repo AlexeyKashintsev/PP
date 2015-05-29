@@ -83,7 +83,7 @@ function OperControl() {
     };
 
     this.changePoliceTasksStatus = function (policeTasks, status, onSuccess, onFailure) {
-            policeTaskWS.save(policeTasks, status, onSuccess, onFailure);
+        policeTaskWS.save(policeTasks, status, onSuccess, onFailure);
     };
 
     this.changePoliceWarrantsStatus = function (policeWarrants, status, onSuccess, onFailure) {

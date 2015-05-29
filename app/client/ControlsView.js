@@ -179,7 +179,7 @@ function ControlsView() {
                 selectedTasks,
                 selectedTaskStatus,
                 function () {
-                    initTaskGrid();
+                    API.updateTasks();
                 },
                 function (e) {
                     P.Logger.severe(e);

@@ -9,11 +9,12 @@ function InvocationContext() {
 
 // Тест
 var inforUrl = 'http://infor.trans-monitor.ru:9393/vms-ws/rest/';
+var devUrl = 'http://infor.trans-monitor.ru:9393/vms-ws/socket';
 var iv = new InvocationContext();
 
 var cs = {
-    useDB: false,
-    updateDB: true
+    useDB: true,
+    updateDB: false
 };
 
 function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext) {
