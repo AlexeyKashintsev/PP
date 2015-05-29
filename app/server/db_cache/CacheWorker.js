@@ -10,7 +10,10 @@ function CacheWorker() {
     self.getCached = function(anUrl, onSuccess, onFailure) {
         model.cache_all.params.url = anUrl;
         model.cache_all.requery(function() {
-            onSuccess(model.cache_all.cursor.response);
+            if (!model.cache_all.empty)
+                onSuccess(model.cache_all.cursor.response);
+            else
+                onFailure();
         }, onFailure);
     };
     

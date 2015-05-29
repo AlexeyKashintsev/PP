@@ -21,36 +21,37 @@ function OperControl() {
     var transportWS = new P.ServerModule('TransportWS');
     var policeWarrant2TaskLinkWS = new P.ServerModule('PoliceWarrant2TaskLinkWS');
     
+    this.test = true;
+    
     this.getUser = function (onSuccess, onFailure) {
         securityWS.getUser(onSuccess, onFailure);
     };
 
     this.getDownTownCoordinates = function (onSuccess, onFailure) {
         var workplaceId = 47233086; // OperationalInformation workplace identifier
-        systemParameterListWS.getWorkPlaceRuntimeParameters(workplaceId,
-                function (response) {
-                    var params = response.split(';');
-                    var center = null;
-                    for (var i = 0, length = params.length; i < length && !center; i++) {
-                        var paramKeyValuePair = params[i].split('=');
-                        if (paramKeyValuePair.length > 1 && paramKeyValuePair[0] === 'CoordinatesDownTown') {
-                            var coords = paramKeyValuePair[1].split(",");
-                            if (coords.length > 1) {
-                                center = [coords[0], coords[1]];
-                            }
-                        }
-                    }
-                    onSuccess(center);
-                }
-        , onFailure);
+        systemParameterListWS.getWorkPlaceRuntimeParameters(workplaceId, onSuccess, onFailure);
     };
-
+    
+    var transportStatuses;
     this.getTransportStatuses = function (onSuccess, onFailure) {
-        transportStatusWS.getList(onSuccess, onFailure);
+        if (!transportStatuses)
+            transportStatusWS.getList(function(aResult) {
+                transportStatuses = aResult;
+                onSuccess(aResult);
+            }, onFailure);
+        else
+            onSuccess(transportStatuses);
     };
-
+    
+    var policeTaskExec;
     this.getPoliceTaskExec = function (onSuccess, onFailure) {
-        policeTaskExecWS.getList(onSuccess, onFailure);
+        if (!policeTaskExec)
+            policeTaskExecWS.getList(function(aResult) {
+                policeTaskExec = aResult;
+                onSuccess(aResult);
+            }, onFailure);
+        else
+            onSuccess(policeTaskExec);
     };
 
     this.getDispositionPlans = function (onSuccess, onFailure) {

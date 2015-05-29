@@ -30,7 +30,6 @@ function SubdivisionsView() {
     function prepareTreeGridSource(objects) {
         var treeGridSource = [], nodes = [];
         objects.forEach(function (obj) {
-            inApp.mapObjAPI.newSubdivision(obj);
             if (!nodes[obj.id]) {
                 nodes[obj.id] = {
                     node: obj,

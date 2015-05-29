@@ -18,7 +18,7 @@ var cs = {
 
 function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext) {
     function success(aResponse) {
-        P.Logger.info(aService + '/' + aMethod + ' answer: \n' + aResponse);
+//        P.Logger.info(aService + '/' + aMethod + ' answer: \n' + aResponse);
         if (cs.updateDB)
             cacheWorker.writeCache(aService + '/' + aMethod, aResponse);
         var loaded = JSON.parse(aResponse);
@@ -36,11 +36,11 @@ function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomIn
     var cacheWorker = new CacheWorker();
     var URL = inforUrl + aService + '/' + aMethod;
     var params = aCustomInvocationContext ? [aCustomInvocationContext].concat(aParams) : [iv].concat(aParams);
-    if (cs.useDB) {
-        P.Logger.info(aService + '/' + aMethod + ' http request: \n' + JSON.stringify(params));
+    if (!cs.useDB) {
+//        P.Logger.info(aService + '/' + aMethod + ' http request: \n' + JSON.stringify(params));
         Http.post(URL, JSON.stringify(params), success, failure);
     } else {
-        P.Logger.info(aService + '/' + aMethod + ' db request: \n' + JSON.stringify(params));
+//        P.Logger.info(aService + '/' + aMethod + ' db request: \n' + JSON.stringify(params));
         cacheWorker.getCached(aService + '/' + aMethod, success, failure);
     }
 };

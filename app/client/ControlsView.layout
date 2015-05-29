@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
+  <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="98px" prefWidth="439px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagment" parent="view" prefHeight="98px" prefWidth="439px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <Button cursor="0" name="btnSetWarrant" parent="pnlManagment" prefHeight="20px" prefWidth="130px" text="Назначить наряд" toolTipText="Назначить наряд на происшествие (двойной щелчок на карте)">
+    <AnchorsPaneConstraints height="20px" left="10px" top="10px" width="130px"/>
+  </Button>
+  <Button cursor="0" name="btnRemoveWarrant" parent="pnlManagment" prefHeight="20px" prefWidth="100px" text="Снять наряд" toolTipText="Снять наряд с происшествия">
+    <AnchorsPaneConstraints height="20px" left="180px" top="10px" width="100px"/>
+  </Button>
+  <Button cursor="0" name="btnRemoveAllWarrants" parent="pnlManagment" prefHeight="20px" prefWidth="130px" text="Снять все наряды" toolTipText="Снять все наряды с происшествия">
+    <AnchorsPaneConstraints height="20px" left="300px" top="10px" width="130px"/>
+  </Button>
+  <Label cursor="0" name="lblTaskStatus" parent="pnlManagment" prefHeight="20px" prefWidth="150px" text="Статус происшествия">
+    <AnchorsPaneConstraints height="20px" left="10px" top="40px" width="150px"/>
+  </Label>
+  <Label cursor="0" name="lblWarrantStatus" parent="pnlManagment" prefHeight="20px" prefWidth="150px" text="Статус наряда">
+    <AnchorsPaneConstraints height="20px" left="10px" top="68px" width="150px"/>
+  </Label>
+  <ModelCombo cursor="0" name="cmbTaskStatus" parent="pnlManagment" prefHeight="20px" prefWidth="190px">
+    <AnchorsPaneConstraints height="20px" left="180px" top="40px" width="190px"/>
+  </ModelCombo>
+  <ModelCombo cursor="0" name="cmbWarrantStatus" parent="pnlManagment" prefHeight="20px" prefWidth="190px">
+    <AnchorsPaneConstraints height="20px" left="180px" top="68px" width="190px"/>
+  </ModelCombo>
+  <Button cursor="0" icon="icons/arrow_right.png" name="btnChangeSelectedTasksStatus" parent="pnlManagment" prefHeight="20px" prefWidth="40px" toolTipText="Сменить статус у выбранных происшествий">
+    <AnchorsPaneConstraints height="20px" left="390px" top="40px" width="40px"/>
+  </Button>
+  <Button cursor="0" icon="icons/arrow_right.png" name="btnChangeSelectedWarrantsStatus" parent="pnlManagment" prefHeight="20px" prefWidth="40px" toolTipText="Сменить статус у выбранных нарядов">
+    <AnchorsPaneConstraints height="20px" left="390px" top="68px" width="40px"/>
+  </Button>
+</layout>

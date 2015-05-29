@@ -50,7 +50,7 @@ function WarrantsView() {
                     
                     form.grdWarrants.redraw();
                     
-                    initSubdivisionGrid();
+//                    initSubdivisionGrid();
                 },
                 function (e) {
                     P.Logger.severe(e);
@@ -59,5 +59,12 @@ function WarrantsView() {
     
     self.getSelected = function() {
         return form.grdWarrants.selected;
+    };
+    
+    self.setSelected = function(aTasks) {
+        form.grdWarrants.clearSelection();
+        aTasks.forEach(function(warrant) {
+            form.grdWarrants.select(warrant);     
+        });
     };
 }

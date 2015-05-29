@@ -12,13 +12,23 @@ function TaskMapSticker(aTaskData, aContainer) {
     };
     
     self.showOn = function(aContainer) {
-        aContainer.setAttribute("style", "height: 200px;width: 300px;overflow: hidden; display: block");
         form.view.showOn(aContainer);
-    };   
+    };
+    
+    self.bind = function (aMarker) {
+        var div = document.createElement('div');
+        div.style.position = 'relative';
+        div.style.width = form.view.width + 'px'; 
+        div.style.height = form.view.height + 'px'; 
+        var popup = L.popup({maxWidth: 500});
+        popup.setContent(div);        
+        popup.view = form.view;
+        aMarker.bindPopup(popup);
+    };
     
     var taskExecStatuses = [];
     function initTaskStatusCombo() {
-        operInfoProxy.getPoliceTaskExec(
+        oc.getPoliceTaskExec(
                 function (statuses) {
                     taskExecStatuses = [];
                     statuses.forEach(function (status) {
@@ -35,7 +45,6 @@ function TaskMapSticker(aTaskData, aContainer) {
                     P.Logger.severe(e);
                 });
     }
-    initTaskStatusCombo();
     
     function findSatusById(aSatusId) {
         var res = null;
@@ -56,6 +65,7 @@ function TaskMapSticker(aTaskData, aContainer) {
         form.mdCreationTime.field = "startAt";
         form.cmbTaskStatus.value = findSatusById(taskData.exec.id);
         //form.cmbTaskStatus.field = "selectedStatus";
+        initTaskStatusCombo();
     };
     
     if (aTaskData)

@@ -1,3 +1,4 @@
+P.require(['client/libs/DecToHex.js']);
 /**
  * 
  * @author Алексей
@@ -12,35 +13,17 @@ function TasksView() {
         initTaskGrid();
     };
     
-    var taskExecStatuses = [];
-    function initTaskStatusCombo() {
-        oc.getPoliceTaskExec(
-                function (statuses) {
-                    taskExecStatuses = [];
-                    statuses.forEach(function (status) {
-                        taskExecStatuses.push(status);
-                    });
-
-                    form.cmbTaskStatus.displayList = taskExecStatuses;
-                    form.cmbTaskStatus.displayField = "description";
-                },
-                function (e) {
-                    P.Logger.severe(e);
-                });
-    }
-    
-    var listT = [], viewT = [], incidents = [], listenIdTask = [];
+    var listT = [], viewT = [], incidents = [], listenIdTask = {};
     function initTaskGrid() {
         listT = [];
         viewT = [];
         incidents = [];
-        listenIdTask = [];
+        listenIdTask = {};
         oc.getFilteredPoliceTasks(
                 function (tasks) {
                     tasks.forEach(function (task) {
-                        inApp.mapObjAPI.newTask(task);
                         listT.push(task);
-                        listenIdTask.push(task.id);
+                        listenIdTask[task.id] = listT.length - 1;
                         if (!incidents[task.incident.id])
                             incidents[task.incident.id] = task.incident;
                     });
@@ -55,7 +38,32 @@ function TasksView() {
                 });
     }
     
+    form.grdTasks.onRender = function(event) {
+        try {
+            if (event.source.field === 'incident.description')
+                event.cell.background = new P.Color(getHexColor(event.object.incident.color));
+            else
+                event.cell.background = new P.Color(getHexColor(event.object.exec.color));
+        } catch (e) {
+            console.log('Ошибка применения цвета ' + e);
+        }
+    };
+    
+    form.grdTasks.onMouseClicked = function(event) {
+        cAPI.selectTask();
+    };
+
+    
     self.getSelected = function() {
         return form.grdTasks.selected;
+    };
+    
+    self.setSelected = function(aTasks) {
+        form.grdTasks.clearSelection();
+        aTasks.forEach(function(taskId) {
+            var taskData = listT[listenIdTask[taskId]];
+            if (taskData)
+                form.grdTasks.makeVisible(taskData, true);
+        });
     };
 }

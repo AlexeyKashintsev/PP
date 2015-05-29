@@ -5,31 +5,37 @@ function OperInfoMapView() {
     var self = this
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
-
+    
+    var mapOperInfo;
     var mapObjects = new MapObjects();
+    var mapSubdivisions = new MapSubdivisions(mapObjects, self);
+    var mapTasks = new MapTasks(mapObjects, self);
+    var mapWarrants = new MapWarrants(mapObjects, self);
+    mAPI = new ClientAPI({
+        tasks: mapTasks,
+        subdivisions: mapSubdivisions,
+        warrants: mapWarrants
+    }, 'ClientMapAPI');
     
     function show(panel) {
         P.require('mapClient/libs/leaflet.js', function () {
             // geom.js depends on leaflet.js
             P.require('mapClient/libs/geom.js', function () {
                 initMap();
+                var containerElement = document.getElementById("OperInfoMapView");
+                if (containerElement)
+                    form.view.showOn(containerElement);
                 if (panel)
                     panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
             });
         });
     }
     
-    self.show = function () {
-        show();
+    self.show = function (panel) {
+        show(panel);
     };
 
-    // TODO : place your code here
-
-    model.requery(function () {
-        // TODO : place your code here
-    });
-
-    this.showOnPanel = function (panel) {
+    self.showOnPanel = function (panel) {
         show(panel);
     };
 
@@ -68,7 +74,10 @@ function OperInfoMapView() {
                     });
             mapOperInfo.addControl(zoomControl);
             mapOperInfo.addControl(scaleControl);
-            self.mapOperInfo = mapOperInfo;
+            mapOperInfo.on('popupopen', function (evt) {
+                if (evt.popup.view)
+                    evt.popup.view.showOn(evt.popup.getContent());
+            });
             mapObjects.setMap(mapOperInfo);
         }
 

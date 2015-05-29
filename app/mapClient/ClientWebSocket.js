@@ -3,7 +3,7 @@
  * @author Алексей
  * @constructor
  */ 
-function WebSocket() {
+function ClientWebSocket() {
     var self = this;
     
     var socket = new WebSocket("ws://javascript.ru/ws");

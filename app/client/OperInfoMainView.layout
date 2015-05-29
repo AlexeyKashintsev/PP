@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?><layout title="" view="view">
   <AnchorsPane background="#ffffff" cursor="0" name="view" prefHeight="668px" prefWidth="1284px"/>
-  <SplitPane cursor="0" dividerLocation="450" foreground="#000000" leftComponent="pnlOperInfoData" name="splitOperInfo" parent="view" prefHeight="668px" prefWidth="1281px" rightComponent="pnlOperInfoMap">
-    <font family="Monospaced" size="11" style="0"/>
-    <AnchorsPaneConstraints bottom="0px" left="0px" right="3px" top="0px"/>
-  </SplitPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperInfoMap" parent="splitOperInfo" prefHeight="666px" prefWidth="825px"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperInfoData" parent="splitOperInfo" prefHeight="666px" prefWidth="449px"/>
-  <SplitPane cursor="0" dividerLocation="300" foreground="#000000" leftComponent="splitPane1" name="splitData" orientation="0" parent="pnlOperInfoData" prefHeight="640px" prefWidth="449px" rightComponent="splitPane2">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlOperInfoData" parent="view" prefHeight="668px" prefWidth="1284px">
+    <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="0px"/>
+  </AnchorsPane>
+  <SplitPane cursor="0" dividerLocation="300" foreground="#000000" leftComponent="splitPane1" name="splitData" orientation="0" parent="pnlOperInfoData" prefHeight="642px" prefWidth="1284px" rightComponent="splitPane2">
     <font family="Monospaced" size="11" style="0"/>
     <AnchorsPaneConstraints bottom="-4px" left="1px" right="-1px" top="30px"/>
   </SplitPane>
-  <SplitPane cursor="0" dividerLocation="200" foreground="#000000" leftComponent="pnTasks" name="splitPane1" orientation="0" parent="splitData" prefHeight="299px" prefWidth="447px" rightComponent="pnlManagment">
+  <SplitPane cursor="0" dividerLocation="200" foreground="#000000" leftComponent="pnTasks" name="splitPane1" orientation="0" parent="splitData" prefHeight="299px" prefWidth="1282px" rightComponent="pnlManagment">
     <font family="Monospaced" size="11" style="0"/>
   </SplitPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnTasks" parent="splitPane1" prefHeight="199px" prefWidth="445px"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagment" parent="splitPane1" prefHeight="93px" prefWidth="445px"/>
-  <SplitPane cursor="0" dividerLocation="200" foreground="#000000" leftComponent="pnlWarrants" name="splitPane2" orientation="0" parent="splitData" prefHeight="334px" prefWidth="447px" rightComponent="pnlSubdivisionsTree">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnTasks" parent="splitPane1" prefHeight="199px" prefWidth="1280px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagment" parent="splitPane1" prefHeight="93px" prefWidth="1280px"/>
+  <SplitPane cursor="0" dividerLocation="200" foreground="#000000" leftComponent="pnlWarrants" name="splitPane2" orientation="0" parent="splitData" prefHeight="336px" prefWidth="1282px" rightComponent="pnlSubdivisionsTree">
     <font family="Monospaced" size="11" style="0"/>
   </SplitPane>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlWarrants" parent="splitPane2" prefHeight="199px" prefWidth="445px"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlSubdivisionsTree" parent="splitPane2" prefHeight="128px" prefWidth="445px"/>
-  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagePanelVisibility" parent="pnlOperInfoData" prefHeight="30px" prefWidth="450px">
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlWarrants" parent="splitPane2" prefHeight="199px" prefWidth="1280px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlSubdivisionsTree" parent="splitPane2" prefHeight="130px" prefWidth="1280px"/>
+  <AnchorsPane background="#ffffff" cursor="0" name="pnlManagePanelVisibility" parent="pnlOperInfoData" prefHeight="30px" prefWidth="1285px">
     <AnchorsPaneConstraints height="30px" left="0px" right="-1px" top="0px"/>
   </AnchorsPane>
   <CheckBox cursor="0" name="chkTasks" parent="pnlManagePanelVisibility" prefHeight="20px" prefWidth="120px" selected="true" text="Происшествия">

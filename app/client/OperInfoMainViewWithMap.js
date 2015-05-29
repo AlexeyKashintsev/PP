@@ -1,14 +1,14 @@
 /**
  * 
  */
-function OperInfoMainView() {
+function OperInfoMainView_1() {
     var self = this
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
 
     new OperControl();
     
-//    var operInfoMapView = new OperInfoMapView();
+    var operInfoMapView = new OperInfoMapView();
     var subdivisionsView = new SubdivisionsView();
     var tasksView = new TasksView();
     var warrantsView = new WarrantsView();
@@ -22,9 +22,9 @@ function OperInfoMainView() {
     
     
     self.show = function () {
-        var containerElement = document.getElementById("OperInfoMainView");
+        var containerElement = document.getElementById("OperInfoView");
         form.view.showOn(containerElement);
-//        operInfoMapView.showOnPanel(form.pnlOperInfoMap);
+        operInfoMapView.showOnPanel(form.pnlOperInfoMap);
         subdivisionsView.show(form.pnlSubdivisionsTree);
         tasksView.show(form.pnTasks);
         warrantsView.show(form.pnlWarrants);
