@@ -53,13 +53,26 @@ function OperControl() {
         else
             onSuccess(policeTaskExec);
     };
-
+    
+    var dispositionPlan;
     this.getDispositionPlans = function (onSuccess, onFailure) {
-        dispositionPlanWS.getList(onSuccess, onFailure);
+        if (dispositionPlan)
+            onSuccess([dispositionPlan]);
+        else
+            dispositionPlanWS.getList(function(res) {
+                dispositionPlan = res[0];
+                onSuccess(res);
+            }, onFailure);
     };
 
     this.getPolicePosts = function (dispositionPlanId, onSuccess, onFailure) {
-        policePostWS.getList(dispositionPlanId, onSuccess, onFailure);
+        if (dispositionPlanId)
+            policePostWS.getList(dispositionPlanId, onSuccess, onFailure);
+        else {
+            this.getDispositionPlans(function(aDispPlans) {
+                this.getPolicePosts(aDispPlans.id,  onSuccess, onFailure);
+            }, onFailure);
+        }
     };
 
     this.getPolicePost = function (policePostId, onSuccess, onFailure) {
