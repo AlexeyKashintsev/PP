@@ -120,9 +120,9 @@ function ClientAPI(anApiModules, anApiType) {
     var wsDataFeed;
     try {
         P.require(['client/libs/ClientWebSocket.js'], function () {
-            wsDataFeed = getWebSocket(anApiType, self.processAPI);
+            wsDataFeed = getWebSocket('AppApi', anApiType, self.processAPI);
         });
     } catch(e) {
-        console.log('Error initializing websocket')
+        console.log('Error initializing websocket');
     }
 }

@@ -8,5 +8,5 @@ function AppGlobal() {
     var self = this, model = P.loadModel(this.constructor.name);
     
     inAppApiSessions = [];
-    
+    inAppDevSessions = [];
 }

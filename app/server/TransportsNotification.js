@@ -9,7 +9,7 @@ P.require('server/libs/infor.js');
 function TransportsNotification() {
     var self = this, model = P.loadModel(this.constructor.name);
 
-    self.onopen = function(aWsSession){
+    self.onopen = function(aWsSession) {
         var iContext = new InvocationContext();
         var proxy = null;
         var signed = false;
@@ -18,12 +18,15 @@ function TransportsNotification() {
                 var devices = JSON.parse(evt.data);
                 proxy = new P.WebSocket(devUrl);
                 proxy.onopen = function () {
-                    proxy.send(JSON.stringify({
+                    var subscribeStr = JSON.stringify({
                         serviceName:"NDDataWS",
                         methodName:"sendList",
                         messageType:"ru.infor.ws.business.vms.websocket.objects.SubscribingOptions_SendListNDData",
                         context: iContext,
-                        deviceIdList: devices}));
+                        deviceIdList: devices
+                    });
+                    P.Logger.info(subscribeStr);
+                    proxy.send(subscribeStr);
                 };
                 proxy.onclose = function () {
                     aWsSession.close();
@@ -33,10 +36,17 @@ function TransportsNotification() {
                 };
                 proxy.onmessage = function (evt) {
                     var data = JSON.parse(evt.data);
+                    P.Logger.info(evt.data);
                     if (!signed && data.status === 0)
                             signed = true;
                     if (data.messageType === "ru.infor.websocket.transport.DataPack")
                         aWsSession.send(evt.data);
+                    if (data.messageType === "ru.infor.websocket.transport.SubscribingResult")
+                        aWsSession.send(JSON.stringify('OK'));
+                    if (data.error) {
+                        aWsSession.send(JSON.stringify('ERROR'));
+                        P.Logger.warning(data);
+                    }
                 };
             }
         };

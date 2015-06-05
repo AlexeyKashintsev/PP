@@ -2,28 +2,12 @@
 <html>
     <head>
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-        <title>Оперативная информация</title>
+        <title>Platypus client start page</title>
         <link rel="stylesheet" type="text/css" href="web/pwc/reset.css" />
         <link rel="stylesheet" type="text/css" href="web/pwc/theme.css" />
-        <link rel="stylesheet" type="text/css" href="app/mapClient/libs/leaflet.css" />
-        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="app/client/libs/leaflet.ie.css" /><![endif]-->        
 	<script type="text/javascript" src="web/pwc/pwc.nocache.js"></script>
-	<!--<script type="text/javascript" src="app/start.js"></script>-->
+	<script type="text/javascript" src="app/start.js"></script>
     </head>
-    <body id="OperInfoView">
-        <div class='links' style="position: absolute; top: 50%; left: 50%; margin-top: -60px; margin-left: -70px; text-align: center; font-size: large">
-            <a href="application-control.html">Управление</a><br>
-            <a href="application-map.html">Карта</a><br>
-            <a href="#" onclick="openWindows()">Открыть оба окна</a>
-        </div>
-        <script>
-            function openWindows() {
-                var height = window.screen.availHeight;
-                var width =  window.screen.availWidth;
-                
-                var w1 = window.open('application-control.html', 'Управление оперативной информацией', 'left=0px, top=0px, height=' + height + 'px, width=' + (width/2-35));
-                var w2 = window.open('application-map.html', 'Карта', 'left='+ width/2 + 'px, top=0px, height=' + height + 'px, width=' + width/2);
-            }
-        </script>
+    <body class="platypus-indicator">
     </body>
 </html>

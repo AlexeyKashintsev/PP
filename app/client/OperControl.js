@@ -10,7 +10,6 @@ function OperControl() {
 
     var securityWS = new P.ServerModule('SecurityWS');
     var systemParameterListWS = new P.ServerModule('SystemParameterListWS');
-    var transportStatusWS = new P.ServerModule('TransportStatusWS');
     var policeTaskExecWS = new P.ServerModule('PoliceTaskExecWS');
     var dispositionPlanWS = new P.ServerModule('DispositionPlanWS');
     var policePostWS = new P.ServerModule('PolicePostWS');
@@ -20,6 +19,8 @@ function OperControl() {
     var policeWarrantWS = new P.ServerModule('PoliceWarrantWS');
     var transportWS = new P.ServerModule('TransportWS');
     var policeWarrant2TaskLinkWS = new P.ServerModule('PoliceWarrant2TaskLinkWS');
+    var transportKindWS = new P.ServerModule('TransportKindWS');
+    var transportStatusWS = new P.ServerModule('TransportStatusWS');
     
     this.test = true;
     
@@ -30,6 +31,17 @@ function OperControl() {
     this.getDownTownCoordinates = function (onSuccess, onFailure) {
         var workplaceId = 47233086; // OperationalInformation workplace identifier
         systemParameterListWS.getWorkPlaceRuntimeParameters(workplaceId, onSuccess, onFailure);
+    };
+    
+    var transportKinds;
+    this.getTransportKinds = function (onSuccess, onFailure) {
+        if (!transportKinds)
+            transportKindWS.getList(function(aResult) {
+                transportKinds = aResult;
+                onSuccess(aResult);
+            }, onFailure);
+        else
+            onSuccess(transportKinds);            
     };
     
     var transportStatuses;

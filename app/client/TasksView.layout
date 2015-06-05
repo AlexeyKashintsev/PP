@@ -6,16 +6,19 @@
   <ModelGrid cursor="0" deletable="false" editable="false" insertable="false" name="grdTasks" parent="view" prefHeight="280px" prefWidth="400px">
     <AnchorsPaneConstraints bottom="0px" left="0px" right="0px" top="20px"/>
     <CheckGridColumn name="column" resizable="true"/>
-    <ModelGridColumn name="colCreateDate" title="Время создания" width="94px">
+    <ModelGridColumn name="colCreateDate" title="Время создания" width="90px">
       <ModelDate dateFormat="dd.MM.yyyy HH:mm:ss"/>
     </ModelGridColumn>
-    <ModelGridColumn name="colTaskType" title="Тип задачи" width="94px">
+    <ModelGridColumn name="colTaskType" title="Тип задачи" width="90px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colIncident" title="Происшествие" width="94px">
+    <ModelGridColumn name="colIncident" title="Происшествие" width="91px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colStatus" title="Статус" width="94px">
+    <ModelGridColumn maxWidth="15px" name="colColor" preferredWidth="15px" readonly="true" resizable="false" sortable="false" title=" " width="15px">
+      <ModelFormattedField/>
+    </ModelGridColumn>
+    <ModelGridColumn name="colStatus" title="Статус" width="90px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
   </ModelGrid>

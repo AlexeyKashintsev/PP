@@ -8,22 +8,23 @@ function InvocationContext() {
 }
 
 // Тест
-var inforUrl = 'http://infor.trans-monitor.ru:9393/vms-ws/rest/';
-var devUrl = 'http://infor.trans-monitor.ru:9393/vms-ws/socket';
+var inforUrlBase = '46.47.1.187:9393';//'infor.trans-monitor.ru:9393';
+var inforUrl = 'http://' + inforUrlBase + '/vms-ws/rest/';
+var devUrl = 'ws://' + inforUrlBase + '/vms-ws/socket';
 var iv = new InvocationContext();
 
 var cs = {
-    useDB: true,
-    updateDB: false
+    useDB: false,
+    updateDB: true
 };
 
-function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext) {
+function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext, isList) {
     function success(aResponse) {
 //        P.Logger.info(aService + '/' + aMethod + ' answer: \n' + aResponse);
         if (cs.updateDB)
             cacheWorker.writeCache(aService + '/' + aMethod, aResponse);
         var loaded = JSON.parse(aResponse);
-        if (aMethod === 'getList') 
+        if (aMethod === 'getList' || isList) 
             loaded = loaded && loaded.objList ? loaded.objList : [];
         onSuccess(loaded);
     }

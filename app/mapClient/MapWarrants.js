@@ -1,3 +1,4 @@
+P.require(["mapClient/libs/svgIcon.js"]);
 /**
  * 
  * @author Алексей
@@ -7,38 +8,51 @@ function MapWarrants(mapObjects, mapControl) {
     var self = this, model = P.loadModel(this.constructor.name);
     var signedDevices = {};
     var warrants = {};
+    var kinds;
     
+    var transportWs;
     
     function Warrant(aWarrantData) {
-        this.selected = false;
-        var needToShow = false;
-        var latlon;
+        var warrant = this;
+        warrant.selected = false;
+        warrant.data = aWarrantData;
+        warrant.unitMarker;
+        var posData, latlon, svg;
         
-        this.getDescription = function() {};
-        this.getLatLon = function() {};
-        this.getIcon = function() {};
-        this.show = function() {
-            if (latlon)
-                this.marker = new mapObjects.Marker(this);
-            else
-                needToShow = true;
+        
+        if (warrant.data.deviceId)
+            signedDevices[warrant.data.deviceId] = warrant;
+        
+        warrant.getDescription = function() {};
+        
+        warrant.show = function() {
+            if (latlon && kinds && getSvgIcon)
+                getSvgIcon('icons/car.svg', warrant.data.statusTSColor, null, function (icon) {
+                    warrant.unitMarker = new mapObjects.Marker(warrant, icon);
+                });                
         };
-        this.getPopup = function() {};
-        this.updateData = function(aNewWarrantData) {};
-        this.onclick = function() {};
         
-        Object.defineProperty(this, "latlon", {
+//        this.getPopup = function() {};
+//        warrant.updateData = function(aNewWarrantData) {};
+        warrant.updatePosition = function(aPositionData) {
+            posData = aPositionData;
+            warrant.latlon = [posData.lat, posData.lon];
+            if (warrant.unitMarker)
+                warrant.unitMarker.setIconAngle(posData.direction);
+        };
+        warrant.onclick = function() {};
+        
+        Object.defineProperty(warrant, "latlon", {
             get: function() {
                 return latlon;
-            }.bind(this),
+            },
             set: function(aLatLon) {
                 latlon = aLatLon;
-                if (this.marker) {
-                    this.marker.latlon = latlon;
+                if (warrant.unitMarker) {
+                    warrant.unitMarker.latlon = latlon;
                 } else 
-                    if (needToShow)
-                        this.show();
-            }.bind(this)
+                    warrant.show();
+            }
         });
     };
     
@@ -52,19 +66,65 @@ function MapWarrants(mapObjects, mapControl) {
     
     function createOrUpdateWarrants(warrant) {
         if (!warrants[warrant.id])
-            warrants[warrant.id] = new Warrant(warrant)
+            warrants[warrant.id] = new Warrant(warrant);
         else
             warrants[warrant.id].updateData(warrant);
+    }
+    
+    function getDevList() {
+        var devList = [];
+        for (var j in signedDevices)
+            devList.push(j);
+        return devList;
+    }
+    
+    function processWSData(aMsg) {
+        if (aMsg === 'OK')
+            console.log('Подписка прошла успешно!');
+        if (aMsg === 'ERROR')
+            console.log('Ошибка сокета!');
+        if (aMsg.messageType === "ru.infor.websocket.transport.DataPack") {
+            aMsg.dataJson.forEach(function(geoData) {
+                signedDevices[geoData.deviceId].updatePosition(geoData);
+            });
+        }
     }
     
     self.updateWarrants = function() {
         oc.getPoliceWarrants(function(warrantsData) {
             warrantsData.forEach(createOrUpdateWarrants);
+            
+            if (transportWs) {
+                transportWs.close();
+                transportWs = null;
+            }
+            
+            try {
+                P.require(['client/libs/ClientWebSocket.js'], function () {
+                    transportWs = getWebSocket('TransportsNotification', getDevList(), processWSData);
+                });
+            } catch(e) {
+                console.log('Error initializing websocket');
+            };
         },
         function (e) {
             P.Logger.severe(e);
         });
     };
     
-//    self.updateWarrants();
+    function getIcons() {
+        oc.getTransportKinds(function(aKinds) {
+            kinds = {};
+            aKinds.forEach(function(kind) {
+                kinds[kind.id] = kind;
+            });
+        }, function() {
+            console.log('Ошибка получения списка типов ТС!');
+        });
+    };
+    getIcons();
+    
+//    var testMsg = '{"msgId":0,"className":"ru.infor.ws.objects.vms.entities.NDData","dataJson":[{"type":{"id":1,"code":"01","description":"по времени","isDeleted":0},"tripIndex":0,"powerValue":0,"de0":0,"de1":0,"de2":0,"de3":0,"de4":0,"de5":0,"de6":0,"de7":0,"direction":17,"alarmDevice":0,"deviceId":48166151,"createdDateTime":"Jun 4, 2015 12:01:39 PM","lat":57.66958999633789,"lon":39.79322814941406,"speed":61,"gpsSatCount":0,"alarm":0}],"sid":"0014dbe30ae5e","serviceName":"NDDataWS","methodName":"sendList","messageType":"ru.infor.websocket.transport.DataPack"}';
+    
+    self.updateWarrants();
 }

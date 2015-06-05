@@ -40,7 +40,7 @@ function TasksView() {
     
     form.grdTasks.onRender = function(event) {
         try {
-            if (event.source.field === 'incident.description')
+            if (!event.source.field)//' === incident.description')
                 event.cell.background = new P.Color(getHexColor(event.object.incident.color));
             else
                 event.cell.background = new P.Color(getHexColor(event.object.exec.color));

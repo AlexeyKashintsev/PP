@@ -19,7 +19,7 @@ function OperInfoMapView() {
     
     function show(panel) {
         P.require('mapClient/libs/leaflet.js', function () {
-            // geom.js depends on leaflet.js
+            P.require('mapClient/libs/marker-rotate.js');
             P.require('mapClient/libs/geom.js', function () {
                 initMap();
                 var containerElement = document.getElementById("OperInfoMapView");

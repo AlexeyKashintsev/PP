@@ -14,13 +14,15 @@ function MapObjects() {
         new OperControl();
     }
     
-    self.Marker = function (aObj) {
+    self.Marker = function (aObj, anIcon) {
         var marker;
+        var m = this;
         this.addToMap = function() {
             if (map) {
                 if (!marker) {
+                    var icon = anIcon ? anIcon : (aObj.getIcon ? aObj.getIcon() : new L.icon({iconUrl: 'app/icons/magnifier.png'}));
                     var params = {
-                        icon: aObj.getIcon(),
+                        icon: icon,
                         title: aObj.getDescription()
                     };
                     marker = L.marker(aObj.latlon, params);
@@ -34,6 +36,7 @@ function MapObjects() {
                     aObj.getPopup().bind(marker);
                 
                 marker.addTo(map);
+                m.setIconAngle = marker.setIconAngle;
             }
         };
         
