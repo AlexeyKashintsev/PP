@@ -91,7 +91,7 @@ jsl.format = function(json) {
     
     var curIndex;
     //var dataAr = [];
-    function prepareArray(aData, aParent) {
+    function prepareArray(aData, aParent, aDeepness) {
         if (!aParent) {
             aParent = null;
             curIndex = 0;
@@ -105,7 +105,7 @@ jsl.format = function(json) {
             };
             if (typeof aData[j] == "object") {
                 rec.data = ">>" + (aData[j].description ? aData[j].description : "object") + "<<";
-                rec.children = prepareArray(aData[j], rec);
+                if (aDeepness < 5) rec.children = prepareArray(aData[j], rec, aDeepness + 1);
             } else {
                 rec.data = aData[j];
             };
@@ -130,9 +130,13 @@ jsl.format = function(json) {
     
     form.button.onActionPerformed = function(event) {
         oc[form.mcMethods.text](function(aResult) {
-            form.result.text = jsl.format(JSON.stringify(aResult));
-            
-            form.res.data = prepareArray(aResult);;
+            try {
+                form.result.text = jsl.format(JSON.stringify(aResult));
+            } catch(e) {
+                form.result.text = e;
+                console.log(e);
+            }
+            form.res.data = prepareArray(aResult,  null, 0);
             form.res.colKey.field = "key";
             form.res.colValue.field = "data";
             form.res.childrenField = "children";

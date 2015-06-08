@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   width="35"
+   height="35"
+   id="svg3591">
+  <defs
+     id="defs3593">
+    <filter
+       x="-0.22494949"
+       y="-0.10589354"
+       width="1.449899"
+       height="1.2117871"
+       color-interpolation-filters="sRGB"
+       id="filter4462">
+      <feGaussianBlur
+         id="feGaussianBlur4464"
+         stdDeviation="1.271199" />
+    </filter>
+    <filter
+       x="-0.21757881"
+       y="-0.10760957"
+       width="1.4351577"
+       height="1.2152191"
+       color-interpolation-filters="sRGB"
+       id="filter4426">
+      <feGaussianBlur
+         id="feGaussianBlur4428"
+         stdDeviation="1.2708287" />
+    </filter>
+    <filter
+       x="-0.21757881"
+       y="-0.10760957"
+       width="1.4351577"
+       height="1.2152191"
+       color-interpolation-filters="sRGB"
+       id="filter4426-1">
+      <feGaussianBlur
+         id="feGaussianBlur4428-4"
+         stdDeviation="1.2708287" />
+    </filter>
+    <filter
+       x="-0.20925809"
+       y="-0.10976827"
+       width="1.4185162"
+       height="1.2195365"
+       color-interpolation-filters="sRGB"
+       id="filter4474">
+      <feGaussianBlur
+         stdDeviation="1.3091431"
+         id="feGaussianBlur4476" />
+    </filter>
+    <filter
+       x="-0.22494949"
+       y="-0.10589354"
+       width="1.449899"
+       height="1.2117871"
+       color-interpolation-filters="sRGB"
+       id="filter4462-6">
+      <feGaussianBlur
+         stdDeviation="1.271199"
+         id="feGaussianBlur4464-9" />
+    </filter>
+    <filter
+       x="-0.2031059"
+       y="-0.11154056"
+       width="1.4062119"
+       height="1.2230811"
+       color-interpolation-filters="sRGB"
+       id="filter4432">
+      <feGaussianBlur
+         id="feGaussianBlur4434"
+         stdDeviation="1.0791967" />
+    </filter>
+    <filter
+       x="-0.23476653"
+       y="-0.1038493"
+       width="1.4695331"
+       height="1.2076986"
+       color-interpolation-filters="sRGB"
+       id="filter4503">
+      <feGaussianBlur
+         id="feGaussianBlur4505"
+         stdDeviation="1.2474246" />
+    </filter>
+    <filter
+       x="-0.21771079"
+       y="-0.10757732"
+       width="1.4354216"
+       height="1.2151546"
+       color-interpolation-filters="sRGB"
+       id="filter4446">
+      <feGaussianBlur
+         id="feGaussianBlur4448"
+         stdDeviation="1.2686837" />
+    </filter>
+    <filter
+       x="-0.21771079"
+       y="-0.10757732"
+       width="1.4354216"
+       height="1.2151546"
+       color-interpolation-filters="sRGB"
+       id="filter3160">
+      <feGaussianBlur
+         id="feGaussianBlur3162"
+         stdDeviation="1.2686837" />
+    </filter>
+    <filter
+       x="-0.16680984"
+       y="-0.12667787"
+       width="1.3336197"
+       height="1.2533557"
+       color-interpolation-filters="sRGB"
+       id="filter4422">
+      <feGaussianBlur
+         id="feGaussianBlur4424"
+         stdDeviation="1.452821" />
+    </filter>
+    <filter
+       x="-0.23476653"
+       y="-0.1038493"
+       width="1.4695331"
+       height="1.2076986"
+       color-interpolation-filters="sRGB"
+       id="filter4503-3">
+      <feGaussianBlur
+         id="feGaussianBlur4505-4"
+         stdDeviation="1.2474246" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata3596">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+
+ <g id="gMainGroup" 
+      onmouseout="document.getElementById('focus').setAttribute('style', document.getElementById('focus').getAttribute('style').replace('stroke-width:2.4','stroke-width:1'));   " 
+      onmouseover="document.getElementById('focus').setAttribute('style', document.getElementById('focus').getAttribute('style').replace('stroke-width:1','stroke-width:2.4'));"  
+   >
+  <path
+     d="m -7.498297,1050.2107 -0.03858,-18.1327 c 0,0 1.09976,-5.0734 6.430618,-5.0763 5.330872,0 6.321707,4.9682 6.321707,4.9682 l -0.01363,18.2527 z"
+     transform="matrix(1.05,0,0,1.05,19.163665,-1073.1911)"
+     id="focus"
+     style="fill:#015e95;fill-opacity:1;stroke:#01304b;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter4503-3)" />
+  <path
+     d="M 11.755639,29.098499 11.717059,10.9658 c 0,0 1.09976,-5.0732999 6.430617,-5.0761999 5.330872,0 6.321707,4.9680999 6.321707,4.9680999 l -0.01363,18.252699 z"
+     id="pathchange"
+     style="fill:#015e95;fill-opacity:1;stroke:#01304b;stroke-width:1.89999998;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  <image
+     xlink:href="file:///home/kraportova/Рабочий стол/Police/newImage/gibdd.svg"
+     x="11.5"
+     y="10"
+     width="15"
+     height="15"
+     id="imageG"
+     style="opacity:0" />
+</g>
+</svg>

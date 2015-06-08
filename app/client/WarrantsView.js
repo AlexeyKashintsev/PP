@@ -25,12 +25,12 @@ function WarrantsView() {
                         listW.push(warrant);
                         if (!kinds[warrant.postWarrantKind.id])
                             kinds[warrant.postWarrantKind.id] = warrant.postWarrantKind;
-                        if (warrant.policeSubdivisionId) {
-                            if (!warrantsBySubdivId[warrant.policeSubdivisionId]) {
-                                warrantsBySubdivId[warrant.policeSubdivisionId] = [];
-                            }
-                            warrantsBySubdivId[warrant.policeSubdivisionId].push(JSON.parse(JSON.stringify(warrant)));
-                        }
+//                        if (warrant.policeSubdivisionId) {
+//                            if (!warrantsBySubdivId[warrant.policeSubdivisionId]) {
+//                                warrantsBySubdivId[warrant.policeSubdivisionId] = [];
+//                            }
+//                            warrantsBySubdivId[warrant.policeSubdivisionId].push(JSON.parse(JSON.stringify(warrant)));
+//                        }
                     });
                     form.grdWarrants.data = listW;
                     form.grdWarrants.colWarrantDate.field = "warrantDate";
@@ -67,4 +67,15 @@ function WarrantsView() {
             form.grdWarrants.select(warrant);     
         });
     };
+    
+    var fmWarrant;
+    form.grdWarrants.onMouseClicked = function(event) {
+        if (event.clickCount === 2) {
+            if (!fmWarrant)
+                fmWarrant = new WarrantCard();
+            fmWarrant.setWarrant(form.grdWarrants.selected[0]);
+            fmWarrant.showModal();
+        }
+    };
+
 }

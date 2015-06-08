@@ -1,4 +1,3 @@
-P.require(["mapClient/libs/svgIcon.js"]);
 /**
  * 
  * @author Алексей
@@ -17,7 +16,7 @@ function MapWarrants(mapObjects, mapControl) {
         warrant.selected = false;
         warrant.data = aWarrantData;
         warrant.unitMarker;
-        var posData, latlon, svg;
+        var posData, latlon, unitSvg;
         
         
         if (warrant.data.deviceId)
@@ -26,10 +25,14 @@ function MapWarrants(mapObjects, mapControl) {
         warrant.getDescription = function() {};
         
         warrant.show = function() {
-            if (latlon && kinds && getSvgIcon)
-                getSvgIcon('icons/car.svg', warrant.data.statusTSColor, null, function (icon) {
-                    warrant.unitMarker = new mapObjects.Marker(warrant, icon);
-                });                
+            if (latlon && kinds)//warrant.data.statusTSColor,
+                getSvgIcon('warrant' + warrant.data.id, 'icons/' + kinds[warrant.data.transportKindId].name
+                            , {
+                                fillColor: warrant.data.postWarrantKind.colorFil,
+                                rimColor: warrant.data.postWarrantKind.colorRim
+                            }, function (taskSvg) {
+                                         warrant.marker = new mapObjects.Marker(warrant, taskSvg.icon);
+                                    });
         };
         
 //        this.getPopup = function() {};
@@ -37,8 +40,8 @@ function MapWarrants(mapObjects, mapControl) {
         warrant.updatePosition = function(aPositionData) {
             posData = aPositionData;
             warrant.latlon = [posData.lat, posData.lon];
-            if (warrant.unitMarker)
-                warrant.unitMarker.setIconAngle(posData.direction);
+            if (unitSvg)
+                unitSvg.setAngle(posData.direction);
         };
         warrant.onclick = function() {};
         

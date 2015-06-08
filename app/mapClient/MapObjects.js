@@ -8,11 +8,6 @@ function MapObjects() {
     var self = this;
     var map;
     var markers = [];
-    try {
-        oc.test;
-    } catch(e) {
-        new OperControl();
-    }
     
     self.Marker = function (aObj, anIcon) {
         var marker;

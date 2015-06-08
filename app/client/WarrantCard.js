@@ -22,11 +22,16 @@ function WarrantCard(parent) {
             warrantData = aWarrantData;
             form.lbPost.text = warrantData.postWarrantKind.description;
             form.lbTC.text = warrantData.transportRegnum;
-            form.lbForces.text = parent.getSubdivisionById(warrantData.policeSubdivisionId).description;
+            form.lbForces.text = warrantData.subdivision.description;
             form.lbStartTime.text = warrantData.postWarrantKind.description;
             form.lbPost.text = warrantData.postWarrantKind.description;
             form.lbPost.text = warrantData.postWarrantKind.description;
             form.lbPost.text = warrantData.postWarrantKind.description;
+            oc.getPoliceWarrant2TaskLinksList([], [warrantData.id], function(aLinks) {
+                console.log(aLinks);
+            }, function(anError) {
+                throw 'Ошибка: ' + anError;
+            });
         } catch (e) {
             console.log('Ошибка ' + e);
         }

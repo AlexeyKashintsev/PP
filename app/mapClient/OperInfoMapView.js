@@ -6,20 +6,16 @@ function OperInfoMapView() {
             , model = P.loadModel(this.constructor.name)
             , form = P.loadForm(this.constructor.name, model);
     
-    var mapOperInfo;
-    var mapObjects = new MapObjects();
-    var mapSubdivisions = new MapSubdivisions(mapObjects, self);
-    var mapTasks = new MapTasks(mapObjects, self);
-    var mapWarrants = new MapWarrants(mapObjects, self);
-    mAPI = new ClientAPI({
-        tasks: mapTasks,
-        subdivisions: mapSubdivisions,
-        warrants: mapWarrants
-    }, 'ClientMapAPI');
+    var mapOperInfo, mapObjects, mapSubdivisions, mapTasks, mapWarrants;
+    try {
+        oc.test;
+    } catch(e) {
+        new OperControl();
+    }
     
     function show(panel) {
-        P.require('mapClient/libs/leaflet.js', function () {
-            P.require('mapClient/libs/marker-rotate.js');
+        P.require(['mapClient/libs/leaflet.js', "mapClient/libs/svgIcon.js", 'client/libs/DecToHex.js'], function () {
+//            P.require('mapClient/libs/marker-rotate.js');
             P.require('mapClient/libs/geom.js', function () {
                 initMap();
                 var containerElement = document.getElementById("OperInfoMapView");
@@ -27,6 +23,15 @@ function OperInfoMapView() {
                     form.view.showOn(containerElement);
                 if (panel)
                     panel.add(form.view, new P.Anchors(2, null, 2, 2, null, 2));
+                mapObjects = new MapObjects();
+                mapSubdivisions = new MapSubdivisions(mapObjects, self);
+                mapTasks = new MapTasks(mapObjects, self);
+                mapWarrants = new MapWarrants(mapObjects, self);
+                mAPI = new ClientAPI({
+                    tasks: mapTasks,
+                    subdivisions: mapSubdivisions,
+                    warrants: mapWarrants
+                }, 'ClientMapAPI');
             });
         });
     }

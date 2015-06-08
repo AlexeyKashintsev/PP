@@ -10,58 +10,73 @@ function MapTasks(mapObjects, mapControl) {
     var selectedTask;
     
     function Task(aTaskData) {
-        this.selected = false;
-        this.getDescription = function() {
-            return "Тип: " + (aTaskData.type.description ? aTaskData.type.description : "Не задан") + "\n" +
-                   "Проишествие: " + (aTaskData.incident.description ? aTaskData.incident.description : "Нет данных") + "\n" +
-                   "Статус: " + (aTaskData.exec.description ? aTaskData.exec.description : "Нет данных") + "\n" +
-                   "Время создания: " + (aTaskData.startAt ? aTaskData.startAt : "Не задано");                       
+        var task = this;
+        var taskSvg;
+        task.data = aTaskData;
+        task.selected = false;
+        task.getDescription = function() {
+            return "Тип: " + (task.data.type.description ? task.data.type.description : "Не задан") + "\n" +
+                   "Проишествие: " + (task.data.incident.description ? task.data.incident.description : "Нет данных") + "\n" +
+                   "Статус: " + (task.data.exec.description ? task.data.exec.description : "Нет данных") + "\n" +
+                   "Время создания: " + (task.data.startAt ? task.data.startAt : "Не задано");                       
         };
 
-        this.getLatLon = function() {
-            return aTaskData.lat && aTaskData.lon ? [aTaskData.lat, aTaskData.lon] : false;
+        task.getLatLon = function() {
+            return task.data.lat && task.data.lon ? [task.data.lat, task.data.lon] : false;
         };
 
-        this.getIcon = function() {
-            return L.icon({iconUrl: 'app/icons/warning.png'});
+        task.getIcon = function() {
+//            return L.icon({iconUrl: 'app/icons/warning.png'});
         };
 
-        this.show = function() {
-            if (this.getLatLon())
-                this.marker = new mapObjects.Marker(this);
-        }.bind(this);
-
-        this.getPopup = function() {
-            return new TaskMapSticker(aTaskData);
+        task.show = function() {
+            if (!getSvgIcon) {
+                if (!svgShow)
+                    svgShow = [];
+                svgShow.push(task.show);
+            }
+                
+            if (task.latlon && getSvgIcon)
+                getSvgIcon('task' + task.data.id, 'icons/star8.svg'
+                            , {
+                                fillColor: task.data.exec.color,
+                                rimColor: task.data.incident.color
+                            }, function (taskSvg) {
+                    task.marker = new mapObjects.Marker(task, taskSvg.icon);
+                });
         };
 
-        this.onclick = function() {
-            selectedTask = this;
-            mAPI.selectTask([aTaskData]);
-        }.bind(this);
-        
-        this.getTaskData = function() {
-            return aTaskData;
+        task.getPopup = function() {
+            return new TaskMapSticker(task.data);
+        };
+
+        task.onclick = function() {
+            selectedTask = task;
+            mAPI.selectTask([task.data]);
         };
         
-        this.getTaskId = function() {
-            return aTaskData.id;
+        task.getTaskData = function() {
+            return task.data;
         };
         
-        this.updateData = function(aNewTaskData) {
-            aTaskData = aNewTaskData;
+        task.getTaskId = function() {
+            return task.data.id;
         };
         
-        this.select = function(doShowTooltip) {
-            this.marker.center();
-            selectedTask = this;
-        }.bind(this);
+        task.updateData = function(aNewTaskData) {
+            task.data = aNewTaskData;
+        };
         
-        Object.defineProperty(this, "latlon", {
+        task.select = function(doShowTooltip) {
+            task.marker.center();
+            selectedTask = task;
+        };
+        
+        Object.defineProperty(task, "latlon", {
             get: function() {
-                return this.getLatLon();
+                return task.getLatLon();
             }.bind(this),
-            set: function(aLatLon) {}.bind(this)
+            set: function(aLatLon) {}
         });
 
         this.show();

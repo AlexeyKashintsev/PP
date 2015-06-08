@@ -2,6 +2,7 @@
  * 
  * @author Алексей
  * @constructor
+ * @public
  */
 function OperControl() {
     var self = this, model = P.loadModel(this.constructor.name);
@@ -42,6 +43,17 @@ function OperControl() {
             }, onFailure);
         else
             onSuccess(transportKinds);            
+    };
+    
+    var kindIcons = [];
+    this.getKindIcon = function (aKindId, onSuccess, onFailure) {
+        if (!kindIcons[aKindId])
+            transportKindWS.getIcon(aKindId, function(aResult) {
+                kindIcons[aKindId] = aResult;
+                onSuccess(aResult);
+            }, onFailure);
+        else
+            onSuccess(kindIcons[aKindId]);            
     };
     
     var transportStatuses;
@@ -98,13 +110,39 @@ function OperControl() {
     this.getFilteredPoliceTasks = function (onSuccess, onFailure) {
         policeTaskWS.getList(onSuccess, onFailure);
     };
-//    TODO Что-то здесь хрень
+    
+    function mergeWarrantsAndSubdivisions() {
+        warrants.forEach(function(warrant) {
+            if (warrant.policeSubdivisionId)
+                subdivisions.forEach(function(subdivision) {
+                    if (!subdivision.warrants)
+                        subdivision.warrants = [];
+                    if (warrant.policeSubdivisionId === subdivision.id) {
+                        warrant.subdivision = subdivision;
+                        subdivision.warrants.push(warrant);
+                    }
+                });
+        });
+    }
+    
+    var warrants;
     this.getPoliceWarrants = function (onSuccess, onFailure) {
-        policeWarrantUIWS.getList(onSuccess, onFailure);
+        policeWarrantUIWS.getList(function(aWarrants) {
+            warrants = aWarrants;
+            if (subdivisions)
+                mergeWarrantsAndSubdivisions();
+            onSuccess(warrants);
+        }, onFailure);
     };
-
+    
+    var subdivisions;
     this.getPoliceSubdivisions = function (onSuccess, onFailure) {
-        policeSubdivisionWS.getList(onSuccess, onFailure);
+        policeSubdivisionWS.getList(function(aSubdivisions) {
+            subdivisions = aSubdivisions;
+            if (warrants)
+                mergeWarrantsAndSubdivisions();
+            onSuccess(subdivisions);
+        }, onFailure);
     };
 
     this.changePoliceTasksStatus = function (policeTasks, status, onSuccess, onFailure) {
@@ -141,7 +179,18 @@ function OperControl() {
         if (expectedCalls === 0)
             onSuccess();
     };
-
+    
+    this.getPoliceWarrant2TaskLinksList = function(aTasksList, aWarrantsList, onSuccess, onFailure) {
+        if (!onSuccess && !onFailure && typeof aTasksList === "function") {
+                onSuccess = aTasksList;
+                aTasksList = [];
+                if (aWarrantsList && typeof aWarrantsList === "function")
+                    onFailure = aWarrantsList;
+                aWarrantsList = [];
+            }
+        policeWarrant2TaskLinkWS.getList(aTasksList, aWarrantsList, onSuccess, onFailure);
+    };
+    
     this.setWarrant = function (warrantId, taskId, dt, onSuccess, onFailure) {
         policeWarrantWS.updateWarrantTaskById(
                 warrantId,
@@ -159,4 +208,8 @@ function OperControl() {
                 onSuccess,
                 onFailure);
     };
+    
+    this.getTransportList = function (onSuccess, onFailure) {
+        transportWS.getList(onSuccess, onFailure);
+    }
 }

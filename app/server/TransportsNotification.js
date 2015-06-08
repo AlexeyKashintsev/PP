@@ -37,8 +37,10 @@ function TransportsNotification() {
                 proxy.onmessage = function (evt) {
                     var data = JSON.parse(evt.data);
                     P.Logger.info(evt.data);
-                    if (!signed && data.status === 0)
+                    if (!signed && data.status === 0) {
                             signed = true;
+                            P.Logger.info('Succesfully subscribed!');
+                        }
                     if (data.messageType === "ru.infor.websocket.transport.DataPack")
                         aWsSession.send(evt.data);
                     if (data.messageType === "ru.infor.websocket.transport.SubscribingResult")

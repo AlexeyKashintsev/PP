@@ -66,10 +66,10 @@
     <AnchorsPaneConstraints height="170px" left="0px" top="0px" width="410px"/>
   </AnchorsPane>
   <Label cursor="0" name="label" parent="pnlWarrantCI" prefHeight="20px" prefWidth="110px" text="Позывной">
-    <AnchorsPaneConstraints height="20px" left="20px" top="110px" width="110px"/>
+    <AnchorsPaneConstraints bottom="20px" height="20px" left="20px" width="110px"/>
   </Label>
   <Label cursor="0" name="label1" parent="pnlWarrantCI" prefHeight="20px" prefWidth="130px" text="Начало дежурства">
-    <AnchorsPaneConstraints height="20px" left="20px" top="90px" width="130px"/>
+    <AnchorsPaneConstraints height="20px" left="20px" top="110px" width="130px"/>
   </Label>
   <Label cursor="0" name="label2" parent="pnlWarrantCI" prefHeight="20px" prefWidth="40px" text="Силы">
     <AnchorsPaneConstraints height="20px" left="20px" top="70px" width="40px"/>
@@ -80,29 +80,29 @@
   <Label cursor="0" name="label5" parent="pnlWarrantCI" prefHeight="20px" prefWidth="40px" text="Пост">
     <AnchorsPaneConstraints height="20px" left="20px" top="30px" width="40px"/>
   </Label>
-  <Label cursor="0" name="lbPost" parent="pnlWarrantCI" prefHeight="20px" prefWidth="615px" text="label7">
+  <Label cursor="0" name="lbPost" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
     <font family="Monospaced" size="11" style="1"/>
-    <AnchorsPaneConstraints height="20px" left="150px" right="-355px" top="30px"/>
+    <AnchorsPaneConstraints height="20px" left="150px" right="0px" top="30px"/>
   </Label>
-  <Label cursor="0" name="lbTC" parent="pnlWarrantCI" prefHeight="20px" prefWidth="615px" text="label7">
+  <Label cursor="0" name="lbTC" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
     <font family="Monospaced" size="11" style="1"/>
-    <AnchorsPaneConstraints height="20px" left="150px" right="-355px" top="50px"/>
+    <AnchorsPaneConstraints height="20px" left="150px" right="0px" top="50px"/>
   </Label>
-  <Label cursor="0" name="lbForces" parent="pnlWarrantCI" prefHeight="20px" prefWidth="615px" text="label7">
+  <Label cursor="0" name="lbForces" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
     <font family="Monospaced" size="11" style="1"/>
-    <AnchorsPaneConstraints height="20px" left="150px" right="-355px" top="70px"/>
+    <AnchorsPaneConstraints height="20px" left="150px" right="0px" top="70px"/>
   </Label>
-  <Label cursor="0" name="lbStartTime" parent="pnlWarrantCI" prefHeight="20px" prefWidth="615px" text="label7">
+  <Label cursor="0" name="lbStartTime" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
     <font family="Monospaced" size="11" style="1"/>
-    <AnchorsPaneConstraints height="20px" left="150px" right="-355px" top="90px"/>
+    <AnchorsPaneConstraints height="20px" left="150px" top="110px" width="260px"/>
   </Label>
-  <Label cursor="0" name="lbNic" parent="pnlWarrantCI" prefHeight="20px" prefWidth="615px" text="label7">
+  <Label cursor="0" name="lbNic" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
     <font family="Monospaced" size="11" style="1"/>
-    <AnchorsPaneConstraints height="20px" left="150px" right="-355px" top="110px"/>
+    <AnchorsPaneConstraints bottom="20px" height="20px" left="150px" width="260px"/>
   </Label>
   <Label cursor="0" name="lbStatus" parent="pnlWarrantCI" prefHeight="20px" prefWidth="345px" text="Статус">
     <font family="Monospaced" size="11" style="1"/>
-    <AnchorsPaneConstraints bottom="6px" height="20px" left="20px" width="345px"/>
+    <AnchorsPaneConstraints bottom="-4px" height="20px" left="20px" width="345px"/>
   </Label>
   <Label background="#0099ff" cursor="0" foreground="#ffffff" horizontalAlignment="0" horizontalTextPosition="0" name="lbCaption" opaque="true" parent="pnlWarrantCI" prefHeight="23px" prefWidth="410px" text="Наряд">
     <font family="Monospaced" size="12" style="1"/>
