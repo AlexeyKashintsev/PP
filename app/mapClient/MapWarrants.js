@@ -16,6 +16,7 @@ function MapWarrants(mapObjects, mapControl) {
         warrant.selected = false;
         warrant.data = aWarrantData;
         warrant.unitMarker;
+        var warrantSvg;
         var posData, latlon, unitSvg;
         
         
@@ -30,13 +31,20 @@ function MapWarrants(mapObjects, mapControl) {
                             , {
                                 fillColor: warrant.data.postWarrantKind.colorFil,
                                 rimColor: warrant.data.postWarrantKind.colorRim
-                            }, function (taskSvg) {
-                                         warrant.marker = new mapObjects.Marker(warrant, taskSvg.icon);
+                            }, function (warrantSvg) {
+                                         warrant.marker = new mapObjects.Marker(warrant, warrantSvg.icon);
                                     });
         };
         
 //        this.getPopup = function() {};
-//        warrant.updateData = function(aNewWarrantData) {};
+        warrant.updateData = function(aNewWarrantData) {
+            warrant.data = aNewWarrantData;
+            warrantSvg.updateParams({
+                fillColor: warrant.data.postWarrantKind.colorFil,
+                rimColor: warrant.data.postWarrantKind.colorRim
+            });
+        };
+        
         warrant.updatePosition = function(aPositionData) {
             posData = aPositionData;
             warrant.latlon = [posData.lat, posData.lon];

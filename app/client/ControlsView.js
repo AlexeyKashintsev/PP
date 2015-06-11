@@ -57,7 +57,7 @@ function ControlsView() {
      * @returns {undefined}
      */
     form.btnRemoveAllWarrants.onActionPerformed = function (event) {
-        var selectedTasks = cAPI.selectedTasks;// form.grdTasks.selected;
+        var selectedTasks = API.selectedTasks;// form.grdTasks.selected;
         if (selectedTasks.length !== 1) {
             alert("Необходимо выбрать одно происшествие");
             return;
@@ -67,7 +67,8 @@ function ControlsView() {
                 selectedTasks[0].id,
                 new Date(),
                 function () {
-                    initTaskGrid();
+                    API.updateTasks();
+                    API.updateWarrants();
                     alert("Операция выполнена");
                 },
                 function (e) {
@@ -81,8 +82,8 @@ function ControlsView() {
      * @returns {undefined}
      */
     form.btnRemoveWarrant.onActionPerformed = function (event) {
-        var selectedWarrants = cAPI.selectedWarrants;//form.grdWarrants.selected;
-        var selectedTasks = cAPI.selectedTasks;//form.grdTasks.selected;
+        var selectedWarrants = API.selectedWarrants;//form.grdWarrants.selected;
+        var selectedTasks = API.selectedTasks;//form.grdTasks.selected;
         if (selectedWarrants.length !== 1 || selectedTasks.length !== 1) {
             alert("Необходимо выбрать происшествие и наряд");
             return;
@@ -94,7 +95,8 @@ function ControlsView() {
                     selectedTasks[0].id,
                     new Date(),
                     function () {
-                        initTaskGrid();
+                        API.updateTasks();
+                        API.updateWarrants();
                         alert("Операция выполнена");
                     },
                     function (e) {
@@ -111,8 +113,8 @@ function ControlsView() {
      * TODO проверять выбрано ли одно проишествие, и если выбрано несколько нарядов пробегаться по всем
      */
     form.btnSetWarrant.onActionPerformed = function (event) {
-        var selectedWarrants = cAPI.selectedWarrants;//form.grdWarrants.selected;
-        var selectedTasks = cAPI.selectedTasks;//form.grdTasks.selected;
+        var selectedWarrants = API.selectedWarrants;//form.grdWarrants.selected;
+        var selectedTasks = API.selectedTasks;//form.grdTasks.selected;
         if (selectedWarrants.length !== 1 || selectedTasks.length !== 1) {
             alert("Необходимо выбрать происшествие и наряд");
             return;
@@ -122,6 +124,8 @@ function ControlsView() {
                 selectedTasks[0].id,
                 new Date(),
                 function () {
+                    API.updateTasks();
+                    API.updateWarrants();
                     alert("Операция привязки выполнена");
                 },
                 function (e) {
@@ -135,7 +139,7 @@ function ControlsView() {
      * @returns {undefined}
      */
     form.btnChangeSelectedWarrantsStatus.onActionPerformed = function (event) {
-        var selectedWarrants = cAPI.selectedWarrants;//form.grdWarrants.selected;
+        var selectedWarrants = API.selectedWarrants;//form.grdWarrants.selected;
         if (!selectedWarrants.length) {
             alert("Необходимо выбрать наряды");
             return;
@@ -150,7 +154,8 @@ function ControlsView() {
                 selectedWarrants,
                 selectedWarrantStatus,
                 function () {
-                    initWarrantGrid();
+                    API.updateTasks();
+                    API.updateWarrants();
                 },
                 function (e) {
                     P.Logger.severe(e);
@@ -164,7 +169,7 @@ function ControlsView() {
      * @returns {undefined}
      */
     form.btnChangeSelectedTasksStatus.onActionPerformed = function (event) {
-        var selectedTasks = cAPI.selectedTasks;//form.grdTasks.selected;
+        var selectedTasks = API.selectedTasks;//form.grdTasks.selected;
         if (!selectedTasks.length) {
             alert("Необходимо выбрать происшествия");
             return;
@@ -180,6 +185,7 @@ function ControlsView() {
                 selectedTaskStatus,
                 function () {
                     API.updateTasks();
+                    API.updateWarrants();
                 },
                 function (e) {
                     P.Logger.severe(e);

@@ -3,7 +3,7 @@
   <AnchorsPane background="#ffffff" cursor="0" name="pnlPersonal" parent="view" prefHeight="170px" prefWidth="322px">
     <AnchorsPaneConstraints height="170px" left="420px" right="0px" top="0px"/>
   </AnchorsPane>
-  <ModelGrid cursor="0" name="modelGrid" parent="pnlPersonal" prefHeight="142px" prefWidth="322px">
+  <ModelGrid cursor="0" name="mgOfficers" parent="pnlPersonal" prefHeight="142px" prefWidth="322px">
     <AnchorsPaneConstraints bottom="0px" height="142px" left="0px" right="0px"/>
     <ModelGridColumn maxWidth="50px" name="colRank" preferredWidth="50px" title="Звание">
       <ModelFormattedField format=""/>
@@ -11,7 +11,7 @@
     <ModelGridColumn name="colFIO" preferredWidth="60px" title="ФИО" width="115px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
-    <ModelGridColumn name="colJobTitile" preferredWidth="100px" title="Должность" width="155px">
+    <ModelGridColumn name="colJobTitle" preferredWidth="100px" title="Должность" width="155px">
       <ModelFormattedField format=""/>
     </ModelGridColumn>
   </ModelGrid>
@@ -25,7 +25,7 @@
   <AnchorsPane background="#ffffff" cursor="0" name="panel" parent="view" prefHeight="340px" prefWidth="742px">
     <AnchorsPaneConstraints bottom="41px" left="0px" right="0px" top="180px"/>
   </AnchorsPane>
-  <ModelGrid cursor="0" name="modelGrid1" parent="panel" prefHeight="270px" prefWidth="722px">
+  <ModelGrid cursor="0" name="mgLinkedTasks" parent="panel" prefHeight="270px" prefWidth="722px">
     <AnchorsPaneConstraints bottom="40px" left="10px" right="10px" top="30px"/>
     <ModelGridColumn name="colTask" title="Задача" width="120px">
       <ModelFormattedField format=""/>
@@ -96,7 +96,7 @@
     <font family="Monospaced" size="11" style="1"/>
     <AnchorsPaneConstraints height="20px" left="150px" top="110px" width="260px"/>
   </Label>
-  <Label cursor="0" name="lbNic" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
+  <Label cursor="0" name="lbCallsign" parent="pnlWarrantCI" prefHeight="20px" prefWidth="260px" text="label7">
     <font family="Monospaced" size="11" style="1"/>
     <AnchorsPaneConstraints bottom="20px" height="20px" left="150px" width="260px"/>
   </Label>

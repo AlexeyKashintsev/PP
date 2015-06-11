@@ -67,7 +67,5 @@ function TasksView() {
         });
     };
     
-    self.updateTasks = function() {
-        initTaskGrid();
-    };
+    self.updateTasks = initTaskGrid;
 }

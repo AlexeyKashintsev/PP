@@ -13,19 +13,19 @@ function AppApi() {
                 try {
                     wsSession.session.send(JSON.stringify(aMsgData));
                 } catch(e) {
-                    P.Logger.warning(e + ' Probably closed session. Deleting from pool!');
-                    delete inAppApiSessions[wsSession.id];
+                    P.Logger.warning(e + ' Probably closed session. Deleting from pool! Session id: ' + wsSession.arr_index);
+                    inAppApiSessions.splice(wsSession.arr_index, 1);
                 }
             }
         });
     }
     
     function pushSession(aWsSession, aSessionType) {
-        aWsSession.id = inAppApiSessions.length;
+        aWsSession.arr_index = inAppApiSessions.length;
         inAppApiSessions.push({
             session: aWsSession,
             sType: aSessionType,
-            id: aWsSession.id
+            id: aWsSession.arr_index
         });
     }
     

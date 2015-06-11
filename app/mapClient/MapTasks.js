@@ -41,9 +41,10 @@ function MapTasks(mapObjects, mapControl) {
                             , {
                                 fillColor: task.data.exec.color,
                                 rimColor: task.data.incident.color
-                            }, function (taskSvg) {
-                    task.marker = new mapObjects.Marker(task, taskSvg.icon);
-                });
+                            }, function (aTaskSvg) {
+                                    taskSvg = aTaskSvg;
+                                    task.marker = new mapObjects.Marker(task, taskSvg.icon);
+                                });
         };
 
         task.getPopup = function() {
@@ -65,6 +66,10 @@ function MapTasks(mapObjects, mapControl) {
         
         task.updateData = function(aNewTaskData) {
             task.data = aNewTaskData;
+            taskSvg.updateParams({
+                                fillColor: task.data.exec.color,
+                                rimColor: task.data.incident.color
+                            });
         };
         
         task.select = function(doShowTooltip) {
@@ -86,7 +91,7 @@ function MapTasks(mapObjects, mapControl) {
         if (!tasks[aTaskData.id])
             tasks[aTaskData.id] = new Task(aTaskData);
         else
-            tasks[aTaskData.id].updateData = aTaskData;
+            tasks[aTaskData.id].updateData(aTaskData);
     };
     
     self.updateTasks = function() {

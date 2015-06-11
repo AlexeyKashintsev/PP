@@ -68,6 +68,8 @@ function WarrantsView() {
         });
     };
     
+    self.updateWarrants = initWarrantGrid;
+    
     var fmWarrant;
     form.grdWarrants.onMouseClicked = function(event) {
         if (event.clickCount === 2) {

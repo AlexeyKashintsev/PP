@@ -49,6 +49,11 @@ function MapObjects() {
             centerMap(aObj);
         };
         
+        this.destroy = function() {
+            map.removeLayer(marker);
+            delete m;
+        };
+        
         markers.push(this);
         this.addToMap();        
     };

@@ -78,5 +78,7 @@ function SubdivisionsView() {
 
         treeGridSource.push(root);
         return treeGridSource;
-    }    
+    }
+    
+    self.updateSubdivisions = initSubdivisionGrid;
 }

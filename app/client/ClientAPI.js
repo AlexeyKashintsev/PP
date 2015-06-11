@@ -8,7 +8,7 @@
  * @constructor
  */ 
 function ClientAPI(anApiModules, anApiType) {
-    var API = this;
+    API = this;
     var self = this, model = P.loadModel(this.constructor.name);
     var API_TYPES = {
         ClientAPI: {
@@ -35,6 +35,10 @@ function ClientAPI(anApiModules, anApiType) {
     };
     
     function setWarrantsControl(aWarrantsControl) {
+        self.updateWarrants = function() {
+            aWarrantsControl.updateWarrants();
+            sendApiMsg('updateWarrants');
+        };
         Object.defineProperty(self, 'selectedWarrants', {
             get : function() {
                 return aWarrantsControl.getSelected();
@@ -46,6 +50,10 @@ function ClientAPI(anApiModules, anApiType) {
     };
     
     function setSubdivisionsControl(aSubdivisionsControl) {
+        self.updateWarrants = function() {
+            aSubdivisionsControl.updateSubdivisions();
+            sendApiMsg('updateSubdivisions');
+        };
         Object.defineProperty(self, 'selectedSubdivisions', {
             get : function() {
                 return aSubdivisionsControl.getSelected();
@@ -83,38 +91,44 @@ function ClientAPI(anApiModules, anApiType) {
     }
     
     function sendApiMsg(aCommand, aData, aDest) {
-        var apiMsg = {
-            dest: aDest ? aDest : API_TYPES[anApiType].dest,
-            command: aCommand,
-            data: aData
-        };
-        
-        try {
-            inAppMsgSend(apiMsg);
-        } catch (e) {
-            wsDataFeed.send(JSON.stringify(apiMsg));
+        if (!RECIEVED_MSG_PROCESS) {
+            var apiMsg = {
+                dest: aDest ? aDest : API_TYPES[anApiType].dest,
+                command: aCommand,
+                data: aData
+            };
+
+            try {
+                inAppMsgSend(apiMsg);
+            } catch (e) {
+                wsDataFeed.send(JSON.stringify(apiMsg));
+            }
         }
     }
     
+    var RECIEVED_MSG_PROCESS = false;
     self.processAPI = function(anApiMsg) {
-        switch (anApiMsg.command) {
-            case 'selectTask': {
-                    self.selectedTasks = anApiMsg.data;
-                    break;
-            }
-            case 'updateTasks': {
-                    self.updateTasks();
-                    break;
-            }
+        try {
+            RECIEVED_MSG_PROCESS = true;
+            console.log('API_COMMAND: ' + anApiMsg.command + ', API_DATA: ' + anApiMsg.data);
+            if (self[anApiMsg.command])
+                self[anApiMsg.command](anApiMsg.data);
+        }
+        finally {
+            RECIEVED_MSG_PROCESS = false;
         }
     };
     
     self.selectTask = function(aTasks) {
-        var tasks = [];
-        (aTasks ? aTasks : self.selectedTasks).forEach(function(task) {
-            tasks.push(task.id);
-        });
-        sendApiMsg('selectTask', tasks);
+        if (!RECIEVED_MSG_PROCESS) {
+            var tasks = [];
+            (aTasks ? aTasks : self.selectedTasks).forEach(function(task) {
+                tasks.push(task.id);
+            });
+            sendApiMsg('selectTask', tasks);
+        } else {
+            self.selectedTasks = aTasks;
+        }
     };
     
     var wsDataFeed;

@@ -15,9 +15,9 @@ function OperControl() {
     var dispositionPlanWS = new P.ServerModule('DispositionPlanWS');
     var policePostWS = new P.ServerModule('PolicePostWS');
     var policeTaskWS = new P.ServerModule('PoliceTaskWS');
+    var policeWarrantWS = new P.ServerModule('PoliceWarrantWS');
     var policeWarrantUIWS = new P.ServerModule('PoliceWarrantUIWS');
     var policeSubdivisionWS = new P.ServerModule('PoliceSubdivisionWS');
-    var policeWarrantWS = new P.ServerModule('PoliceWarrantWS');
     var transportWS = new P.ServerModule('TransportWS');
     var policeWarrant2TaskLinkWS = new P.ServerModule('PoliceWarrant2TaskLinkWS');
     var transportKindWS = new P.ServerModule('TransportKindWS');
@@ -89,14 +89,8 @@ function OperControl() {
             }, onFailure);
     };
 
-    this.getPolicePosts = function (dispositionPlanId, onSuccess, onFailure) {
-        if (dispositionPlanId)
-            policePostWS.getList(dispositionPlanId, onSuccess, onFailure);
-        else {
-            this.getDispositionPlans(function(aDispPlans) {
-                this.getPolicePosts(aDispPlans.id,  onSuccess, onFailure);
-            }, onFailure);
-        }
+    this.getPolicePosts = function (onSuccess, onFailure) {
+        policePostWS.getList(onSuccess, onFailure);
     };
 
     this.getPolicePost = function (policePostId, onSuccess, onFailure) {
@@ -133,6 +127,10 @@ function OperControl() {
                 mergeWarrantsAndSubdivisions();
             onSuccess(warrants);
         }, onFailure);
+    };
+    
+    this.getPoliceWarrantsByList = function (aWarrantIdList, onSuccess, onFailure) {
+        policeWarrantWS.getList(aWarrantIdList, onSuccess, onFailure);
     };
     
     var subdivisions;
@@ -211,5 +209,5 @@ function OperControl() {
     
     this.getTransportList = function (onSuccess, onFailure) {
         transportWS.getList(onSuccess, onFailure);
-    }
+    };
 }
