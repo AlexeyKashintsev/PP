@@ -50,7 +50,7 @@ function ClientAPI(anApiModules, anApiType) {
     };
     
     function setSubdivisionsControl(aSubdivisionsControl) {
-        self.updateWarrants = function() {
+        self.updateSubdivisions = function() {
             aSubdivisionsControl.updateSubdivisions();
             sendApiMsg('updateSubdivisions');
         };
@@ -128,6 +128,30 @@ function ClientAPI(anApiModules, anApiType) {
             sendApiMsg('selectTask', tasks);
         } else {
             self.selectedTasks = aTasks;
+        }
+    };
+    
+    self.selectWarrant = function(aWarrants) {
+        if (!RECIEVED_MSG_PROCESS) {
+            var warrants = [];
+            (aWarrants ? aWarrants : self.selectedTasks).forEach(function(warrant) {
+                warrants.push(warrant.id);
+            });
+            sendApiMsg('selectWarrant', warrants);
+        } else {
+            self.selectedSubdivisions = aWarrants;
+        }
+    };
+    
+    self.selectSubdivision = function(aSubdivisions) {
+        if (!RECIEVED_MSG_PROCESS) {
+            var subdivisions = [];
+            (aSubdivisions ? aSubdivisions : self.selectedTasks).forEach(function(subdivision) {
+                subdivisions.push(subdivision.id);
+            });
+            sendApiMsg('selectSubdivision', subdivisions);
+        } else {
+            self.selectedSubdivisions = aSubdivisions;
         }
     };
     

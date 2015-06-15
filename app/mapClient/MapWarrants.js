@@ -8,6 +8,7 @@ function MapWarrants(mapObjects, mapControl) {
     var signedDevices = {};
     var warrants = {};
     var kinds;
+    var selectedWarrant;
     
     var transportWs;
     
@@ -15,7 +16,7 @@ function MapWarrants(mapObjects, mapControl) {
         var warrant = this;
         warrant.selected = false;
         warrant.data = aWarrantData;
-        warrant.unitMarker;
+        warrant.marker;
         var warrantSvg;
         var posData, latlon, unitSvg;
         
@@ -23,14 +24,21 @@ function MapWarrants(mapObjects, mapControl) {
         if (warrant.data.deviceId)
             signedDevices[warrant.data.deviceId] = warrant;
         
-        warrant.getDescription = function() {};
+        warrant.getDescription = function() {
+            return    'Вид наряда: ' + warrant.data.postWarrantKind.description
+                    + '\nТС: ' + warrant.data.transportRegnum
+                    + '\nСтатус: ' + warrant.data.statusTSname
+                    + '\nТип наряда: ' + warrant.data.postWarrantKind.description
+                    + '\nПодразделение: ' + warrant.data.subdivision.description;
+        };
         
         warrant.show = function() {
             if (latlon && kinds)//warrant.data.statusTSColor,
                 getSvgIcon('warrant' + warrant.data.id, 'icons/' + kinds[warrant.data.transportKindId].name
                             , {
-                                fillColor: warrant.data.postWarrantKind.colorFil,
-                                rimColor: warrant.data.postWarrantKind.colorRim
+                                fillColor: warrant.data.postWarrantKind.colorFill,
+                                rimColor: warrant.data.postWarrantKind.colorRim,
+                                angle: posData.direction
                             }, function (warrantSvg) {
                                          warrant.marker = new mapObjects.Marker(warrant, warrantSvg.icon);
                                     });
@@ -40,8 +48,9 @@ function MapWarrants(mapObjects, mapControl) {
         warrant.updateData = function(aNewWarrantData) {
             warrant.data = aNewWarrantData;
             warrantSvg.updateParams({
-                fillColor: warrant.data.postWarrantKind.colorFil,
-                rimColor: warrant.data.postWarrantKind.colorRim
+                fillColor: warrant.data.postWarrantKind.colorFill,
+                rimColor: warrant.data.postWarrantKind.colorRim,
+                angle: posData.direction
             });
         };
         
@@ -51,7 +60,10 @@ function MapWarrants(mapObjects, mapControl) {
             if (unitSvg)
                 unitSvg.setAngle(posData.direction);
         };
-        warrant.onclick = function() {};
+        warrant.onclick = function() {
+            selectedWarrant = warrant;
+            API.selectTask([warrant.data]);
+        };
         
         Object.defineProperty(warrant, "latlon", {
             get: function() {
@@ -59,8 +71,8 @@ function MapWarrants(mapObjects, mapControl) {
             },
             set: function(aLatLon) {
                 latlon = aLatLon;
-                if (warrant.unitMarker) {
-                    warrant.unitMarker.latlon = latlon;
+                if (warrant.marker) {
+                    warrant.marker.latlon = latlon;
                 } else 
                     warrant.show();
             }

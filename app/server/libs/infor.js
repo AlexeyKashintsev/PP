@@ -8,7 +8,7 @@ function InvocationContext() {
 }
 
 // Тест
-var inforUrlBase = '46.47.1.187:9393';//'infor.trans-monitor.ru:9393';
+var inforUrlBase = 'infor.trans-monitor.ru:9393';//'46.47.1.187:9393';//
 var inforUrl = 'http://' + inforUrlBase + '/vms-ws/rest/';
 var devUrl = 'ws://' + inforUrlBase + '/vms-ws/socket';
 var iv = new InvocationContext();
@@ -21,8 +21,8 @@ var cs = {
 function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomInvocationContext, isList) {
     function success(aResponse) {
 //        P.Logger.info(aService + '/' + aMethod + ' answer: \n' + aResponse);
-        if (cs.updateDB)
-            cacheWorker.writeCache(aService + '/' + aMethod, aResponse);
+//        if (cs.updateDB)
+//            cacheWorker.writeCache(aService + '/' + aMethod, aResponse);
         var loaded = JSON.parse(aResponse);
         if (aMethod === 'getList' || isList) 
             loaded = loaded && loaded.objList ? loaded.objList : [];
@@ -35,7 +35,7 @@ function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomIn
             P.Logger.severe(e);
     }
     
-    var cacheWorker = new CacheWorker();
+//    var cacheWorker = new CacheWorker();
     var URL = inforUrl + aService + '/' + aMethod;
     var params = aCustomInvocationContext ? [aCustomInvocationContext].concat(aParams) : [iv].concat(aParams);
     if (!cs.useDB) {
@@ -43,6 +43,6 @@ function HTTPrequest(aService, aMethod, aParams, onSuccess, onFailure, aCustomIn
         Http.post(URL, JSON.stringify(params), success, failure);
     } else {
         P.Logger.info(aService + '/' + aMethod + ' db request: \n' + JSON.stringify(params));
-        cacheWorker.getCached(aService + '/' + aMethod, success, failure);
+//        cacheWorker.getCached(aService + '/' + aMethod, success, failure);
     }
 };

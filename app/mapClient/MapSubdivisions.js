@@ -6,6 +6,7 @@
 function MapSubdivisions(mapObjects, mapControl) {
     var self = this, model = P.loadModel(this.constructor.name);
     var subdivisions = [];
+    var selectedSubdivison;
 
     function Subdivision(aSubdivisionData) {
         var subdiv = this;
@@ -32,6 +33,11 @@ function MapSubdivisions(mapObjects, mapControl) {
         subdiv.update = function (aNewSubdivData) {
             subdiv.data = aNewSubdivData;
         };
+        
+        subdiv.onclick = function () {
+            selectedSubdivison = subdiv;
+            API.selectSubdivision([subdiv.data]);
+        }
         
         subdiv.latlon = subdiv.getLatLon();
         subdiv.show();

@@ -53,7 +53,7 @@ function MapTasks(mapObjects, mapControl) {
 
         task.onclick = function() {
             selectedTask = task;
-            mAPI.selectTask([task.data]);
+            API.selectTask([task.data]);
         };
         
         task.getTaskData = function() {
