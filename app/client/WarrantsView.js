@@ -61,10 +61,13 @@ function WarrantsView() {
         return form.grdWarrants.selected;
     };
     
-    self.setSelected = function(aTasks) {
+    self.setSelected = function(aWarrants) {
         form.grdWarrants.clearSelection();
-        aTasks.forEach(function(warrant) {
-            form.grdWarrants.select(warrant);     
+        aWarrants.forEach(function(warrant) {
+            var selectedW = listW.find(function(aWarrant) {
+                return aWarrant.id === warrant;
+            });
+            form.grdWarrants.makeVisible(selectedW, true);     
         });
     };
     

@@ -1,8 +1,9 @@
 function SVGController(anIconId, aSvgText, aParams) {
     var iconId = anIconId;
     var paramsSet = false;
+    aSvgText = aSvgText.replace(/focus/g, 'focus_' + anIconId);
     aSvgText = "<div id = 'd" + iconId + "'>" + aSvgText + "</div>";
-    var icon = L.divIcon({className: 'svg-marker', html: aSvgText});
+    var icon = L.divIcon({className: 'svg-marker', html: aSvgText, iconAnchor: [18, 20]});
     var div;
     function getDiv() {
         if (!div) {

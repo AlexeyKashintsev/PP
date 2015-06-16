@@ -30,7 +30,7 @@ function PoliceTaskWS() {
                 }, onFailure);
     };
     //TODO Check
-    this.save = function (policeTasks, onSuccess, onFailure) {
+    this.save = function (policeTasks, status, onSuccess, onFailure) {
         var expectedCalls = 0;
         var results = {errors: [], count: 0};
         function tryComplete(aError) {
@@ -45,7 +45,7 @@ function PoliceTaskWS() {
             }
         }
 
-        policeTasks.forEach(function (policeTask, status) {
+        policeTasks.forEach(function (policeTask) {
             policeTask.createdDateTime = du.dateToString(policeTask.createdDateTime);
             policeTask.exec = status;
             HTTPrequest(serviceName, 'save', [policeTask], tryComplete, function (e) {

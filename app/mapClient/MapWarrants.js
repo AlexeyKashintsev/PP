@@ -17,8 +17,7 @@ function MapWarrants(mapObjects, mapControl) {
         warrant.selected = false;
         warrant.data = aWarrantData;
         warrant.marker;
-        var warrantSvg;
-        var posData, latlon, unitSvg;
+        var posData, latlon, direction, warrantSvg;
         
         
         if (warrant.data.deviceId)
@@ -32,15 +31,19 @@ function MapWarrants(mapObjects, mapControl) {
                     + '\nПодразделение: ' + warrant.data.subdivision.description;
         };
         
+        warrant.getIcon = function() {
+            return warrantSvg ? warrantSvg.icon : null;
+        };
+        
         warrant.show = function() {
             if (latlon && kinds)//warrant.data.statusTSColor,
                 getSvgIcon('warrant' + warrant.data.id, 'icons/' + kinds[warrant.data.transportKindId].name
                             , {
                                 fillColor: warrant.data.postWarrantKind.colorFill,
-                                rimColor: warrant.data.postWarrantKind.colorRim,
-                                angle: posData.direction
-                            }, function (warrantSvg) {
-                                         warrant.marker = new mapObjects.Marker(warrant, warrantSvg.icon);
+                                rimColor: warrant.data.postWarrantKind.colorRim
+                            }, function (aWarrantSvg) {
+                                        warrantSvg = aWarrantSvg;
+                                        warrant.marker = new mapObjects.Marker(warrant, warrantSvg.icon);
                                     });
         };
         
@@ -49,22 +52,32 @@ function MapWarrants(mapObjects, mapControl) {
             warrant.data = aNewWarrantData;
             warrantSvg.updateParams({
                 fillColor: warrant.data.postWarrantKind.colorFill,
-                rimColor: warrant.data.postWarrantKind.colorRim,
-                angle: posData.direction
+                rimColor: warrant.data.postWarrantKind.colorRim
             });
         };
         
         warrant.updatePosition = function(aPositionData) {
             posData = aPositionData;
             warrant.latlon = [posData.lat, posData.lon];
-            if (unitSvg)
-                unitSvg.setAngle(posData.direction);
-        };
-        warrant.onclick = function() {
-            selectedWarrant = warrant;
-            API.selectTask([warrant.data]);
+            warrant.direction = posData.direction;
         };
         
+        warrant.onclick = function() {
+            selectedWarrant = warrant;
+            API.selectWarrant([warrant.data]);
+        };
+        
+        
+        Object.defineProperty(warrant, "direction", {
+            get: function() {
+                return direction;
+            },
+            set: function(aNewDirection) {
+                direction = aNewDirection;
+//                if (warrant.marker)
+//                    warrant.marker.setIconAngle(direction);
+            }
+        });
         Object.defineProperty(warrant, "latlon", {
             get: function() {
                 return latlon;

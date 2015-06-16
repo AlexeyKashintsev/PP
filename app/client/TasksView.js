@@ -45,7 +45,7 @@ function TasksView() {
             else
                 event.cell.background = new P.Color(getHexColor(event.object.exec.color));
         } catch (e) {
-            console.log('Ошибка применения цвета ' + e);
+            console.log('Ошибка применения цвета ' + (event.source.field ? event.object.exec.color : event.object.incident.color) + '\nОшибка:' + e);
         }
     };
     

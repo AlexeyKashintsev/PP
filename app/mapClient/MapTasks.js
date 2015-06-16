@@ -26,7 +26,7 @@ function MapTasks(mapObjects, mapControl) {
         };
 
         task.getIcon = function() {
-//            return L.icon({iconUrl: 'app/icons/warning.png'});
+            return taskSvg ? taskSvg.icon : null;
         };
 
         task.show = function() {
@@ -43,7 +43,7 @@ function MapTasks(mapObjects, mapControl) {
                                 rimColor: task.data.incident.color
                             }, function (aTaskSvg) {
                                     taskSvg = aTaskSvg;
-                                    task.marker = new mapObjects.Marker(task, taskSvg.icon);
+                                    task.marker = new mapObjects.Marker(task);
                                 });
         };
 

@@ -154,8 +154,7 @@ function ControlsView() {
                 selectedWarrants,
                 selectedWarrantStatus,
                 function () {
-                    API.updateTasks();
-                    API.updateWarrants();
+                    
                 },
                 function (e) {
                     P.Logger.severe(e);
@@ -184,8 +183,7 @@ function ControlsView() {
                 selectedTasks,
                 selectedTaskStatus,
                 function () {
-                    API.updateTasks();
-                    API.updateWarrants();
+                    
                 },
                 function (e) {
                     P.Logger.severe(e);

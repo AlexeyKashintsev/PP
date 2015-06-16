@@ -15,8 +15,8 @@ function OperInfoMapView() {
     
     function show(panel) {
         P.require(['mapClient/libs/leaflet.js', "mapClient/libs/svgIcon.js", 'client/libs/DecToHex.js'], function () {
-//            P.require('mapClient/libs/marker-rotate.js');
-            P.require('mapClient/libs/geom.js', function () {
+            P.require('mapClient/libs/marker-rotate.js');
+            P.require(['mapClient/libs/geom.js'], function () {
                 initMap();
                 var containerElement = document.getElementById("OperInfoMapView");
                 if (containerElement)

@@ -24,6 +24,19 @@ function ClientAPI(anApiModules, anApiType) {
             aTasksControl.updateTasks();
             sendApiMsg('updateTasks');
         };
+        
+        self.selectTask = function(aTasks) {
+            if (!RECIEVED_MSG_PROCESS) {
+                var tasks = [];
+                (aTasks ? aTasks : self.selectedTasks).forEach(function(task) {
+                    tasks.push(task.id);
+                });
+                sendApiMsg('selectTask', tasks);
+            } else {
+                self.selectedTasks = aTasks;
+            }
+        };
+        
         Object.defineProperty(self, 'selectedTasks', {
             get : function() {
                 return aTasksControl.getSelected();
@@ -39,6 +52,19 @@ function ClientAPI(anApiModules, anApiType) {
             aWarrantsControl.updateWarrants();
             sendApiMsg('updateWarrants');
         };
+        
+        self.selectWarrant = function(aWarrants) {
+            if (!RECIEVED_MSG_PROCESS) {
+                var warrants = [];
+                (aWarrants ? aWarrants : self.selectedWarrants).forEach(function(warrant) {
+                    warrants.push(warrant.id);
+                });
+                sendApiMsg('selectWarrant', warrants);
+            } else {
+                self.selectedWarrants = aWarrants;
+            }
+        };
+        
         Object.defineProperty(self, 'selectedWarrants', {
             get : function() {
                 return aWarrantsControl.getSelected();
@@ -53,6 +79,18 @@ function ClientAPI(anApiModules, anApiType) {
         self.updateSubdivisions = function() {
             aSubdivisionsControl.updateSubdivisions();
             sendApiMsg('updateSubdivisions');
+        };
+        
+        self.selectSubdivision = function(aSubdivisions) {
+            if (!RECIEVED_MSG_PROCESS) {
+                var subdivisions = [];
+                (aSubdivisions ? aSubdivisions : self.selectedSubdivisions).forEach(function(subdivision) {
+                    subdivisions.push(subdivision.id);
+                });
+                sendApiMsg('selectSubdivision', subdivisions);
+            } else {
+                self.selectedSubdivisions = aSubdivisions;
+            }
         };
         Object.defineProperty(self, 'selectedSubdivisions', {
             get : function() {
@@ -119,41 +157,7 @@ function ClientAPI(anApiModules, anApiType) {
         }
     };
     
-    self.selectTask = function(aTasks) {
-        if (!RECIEVED_MSG_PROCESS) {
-            var tasks = [];
-            (aTasks ? aTasks : self.selectedTasks).forEach(function(task) {
-                tasks.push(task.id);
-            });
-            sendApiMsg('selectTask', tasks);
-        } else {
-            self.selectedTasks = aTasks;
-        }
-    };
     
-    self.selectWarrant = function(aWarrants) {
-        if (!RECIEVED_MSG_PROCESS) {
-            var warrants = [];
-            (aWarrants ? aWarrants : self.selectedTasks).forEach(function(warrant) {
-                warrants.push(warrant.id);
-            });
-            sendApiMsg('selectWarrant', warrants);
-        } else {
-            self.selectedSubdivisions = aWarrants;
-        }
-    };
-    
-    self.selectSubdivision = function(aSubdivisions) {
-        if (!RECIEVED_MSG_PROCESS) {
-            var subdivisions = [];
-            (aSubdivisions ? aSubdivisions : self.selectedTasks).forEach(function(subdivision) {
-                subdivisions.push(subdivision.id);
-            });
-            sendApiMsg('selectSubdivision', subdivisions);
-        } else {
-            self.selectedSubdivisions = aSubdivisions;
-        }
-    };
     
     var wsDataFeed;
     try {

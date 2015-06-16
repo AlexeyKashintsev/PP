@@ -9,17 +9,21 @@ function MapObjects() {
     var map;
     var markers = [];
     
-    self.Marker = function (aObj, anIcon) {
+    self.Marker = function (aObj) {
         var marker;
         var m = this;
         this.addToMap = function() {
             if (map) {
                 if (!marker) {
-                    var icon = anIcon ? anIcon : (aObj.getIcon ? aObj.getIcon() : new L.icon({iconUrl: 'app/icons/magnifier.png'}));
+                    var icon = aObj.getIcon ? aObj.getIcon() : null;
+                    icon = icon ? icon : new L.icon({iconUrl: 'app/icons/magnifier.png'});
                     var params = {
                         icon: icon,
                         title: aObj.getDescription()
                     };
+                    if (aObj.direction)
+                        params.iconAngle = aObj.direction;
+                    
                     marker = L.marker(aObj.latlon, params);
                 }
                 if (aObj.onclick) {

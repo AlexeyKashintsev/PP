@@ -45,6 +45,13 @@ function OperControl() {
             onSuccess(transportKinds);            
     };
     
+    this.getTransportKindsWithUrl = function (onSuccess, onFailure) {
+        transportKindWS.getListWithURL(function(aResult) {
+            transportKinds = aResult;
+            onSuccess(aResult);
+        }, onFailure);     
+    };
+    
     var kindIcons = [];
     this.getKindIcon = function (aKindId, onSuccess, onFailure) {
         if (!kindIcons[aKindId])
@@ -144,7 +151,15 @@ function OperControl() {
     };
 
     this.changePoliceTasksStatus = function (policeTasks, status, onSuccess, onFailure) {
-        policeTaskWS.save(policeTasks, status, onSuccess, onFailure);
+        policeTaskWS.save(policeTasks, status
+            , function() {
+                setTimeout(function() {
+                    onSuccess();
+                    API.updateTasks();
+                    API.updateWarrants();
+                    console.log('Очень плохой код!!! Похоже, ответ от сервера приходит раньше, чем завершается транзакция в БД!');
+                }, 500);
+            }, onFailure);
     };
 
     this.changePoliceWarrantsStatus = function (policeWarrants, status, onSuccess, onFailure) {
@@ -155,9 +170,14 @@ function OperControl() {
                 results.errors[results.errors.length] = aError;
             results.count++;
             if (results.count === expectedCalls) {
-                if (results.errors.length === 0)
-                    onSuccess();
-                else
+                if (results.errors.length === 0) {
+                    setTimeout(function() {
+                        onSuccess();
+                        API.updateTasks();
+                        API.updateWarrants();
+                        console.log('Очень плохой код!!! Похоже, ответ от сервера приходит раньше, чем завершается транзакция в БД!');
+                    }, 500);
+                } else
                     onFailure(results.errors.join('\n'));
             }
         }

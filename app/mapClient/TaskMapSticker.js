@@ -74,7 +74,10 @@ function TaskMapSticker(aTaskData, aContainer) {
         self.showOn(aContainer);
     
     form.btnApplyStatus.onActionPerformed = function(event) {
-        alert('!');
-        self.setTask(taskData);
+        oc.changePoliceTasksStatus([aTaskData], form.cmbTaskStatus.value, function() {
+            console.log('ok!');
+        }, function() {
+            console.log('failure!');
+        });
     };
 }
